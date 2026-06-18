@@ -14,439 +14,262 @@
   --text: #111110;
   --muted: #6B6B65;
   --border: #E8E6E1;
-  --accent: #1A1A18;
   --accent-light: #F0EFE9;
   --blue: #2563EB;
-  --blue-light: #EFF4FF;
-  --radius: 20px;
   --radius-lg: 28px;
   --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.05);
   --shadow-lg: 0 2px 8px rgba(0,0,0,0.06), 0 12px 48px rgba(0,0,0,0.08);
 }
 
 html { scroll-behavior: smooth; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
-body {
-  font-family: 'Inter', -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ─── LAYOUT ─── */
 .wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
 @media (max-width: 768px) { .wrap { padding: 0 20px; } }
 
-/* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; width: 100%; z-index: 100;
-  background: rgba(249,248,246,0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
+/* NAV */
+nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(249,248,246,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
 nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
 .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
 .nav-links { display: flex; gap: 8px; align-items: center; }
-.nav-links a {
-  font-size: 14px; color: var(--muted); text-decoration: none;
-  padding: 6px 14px; border-radius: 99px; transition: all 0.2s;
-}
+.nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; padding: 6px 14px; border-radius: 99px; transition: all 0.2s; }
 .nav-links a:hover { color: var(--text); background: var(--accent-light); }
-.nav-cta {
-  background: var(--text); color: white !important;
-  padding: 8px 20px !important; border-radius: 99px !important;
-  font-size: 14px; font-weight: 500;
-}
-.nav-cta:hover { opacity: 0.85 !important; background: var(--text) !important; }
+.nav-cta { background: var(--text); color: white !important; padding: 8px 20px !important; border-radius: 99px !important; font-size: 14px; font-weight: 500; }
+.nav-cta:hover { opacity: 0.85 !important; }
 
-/* ─── HERO ─── */
-.hero {
-  padding: 160px 0 120px;
-  text-align: center;
-}
-.hero-badge {
-  display: inline-block;
-  font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
-  text-transform: uppercase; color: var(--muted);
-  border: 1px solid var(--border); border-radius: 99px;
-  padding: 5px 16px; margin-bottom: 40px;
-}
-.hero h1 {
-  font-size: clamp(48px, 7vw, 88px);
-  font-weight: 700; letter-spacing: -0.04em;
-  line-height: 1.05; color: var(--text);
-  max-width: 860px; margin: 0 auto 28px;
-}
+/* HERO */
+.hero { padding: 160px 0 120px; text-align: center; }
+.hero-badge { display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); border-radius: 99px; padding: 5px 16px; margin-bottom: 40px; }
+.hero h1 { font-size: clamp(48px, 7vw, 88px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.05; color: var(--text); max-width: 860px; margin: 0 auto 28px; }
 .hero h1 em { font-style: normal; color: var(--muted); }
-.hero-sub {
-  font-size: 18px; color: var(--muted); line-height: 1.7;
-  max-width: 520px; margin: 0 auto 56px; font-weight: 400;
-}
+.hero-sub { font-size: 18px; color: var(--muted); line-height: 1.7; max-width: 520px; margin: 0 auto 56px; font-weight: 400; }
 .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--text); color: white;
-  padding: 14px 32px; border-radius: 99px;
-  font-size: 15px; font-weight: 500; text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-  border: none; cursor: pointer; font-family: inherit;
-}
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--text); color: white; padding: 14px 32px; border-radius: 99px; font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 2px 12px rgba(0,0,0,0.18); border: none; cursor: pointer; font-family: inherit; }
 .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.22); }
-.btn-secondary {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: white; color: var(--text);
-  padding: 14px 32px; border-radius: 99px;
-  font-size: 15px; font-weight: 500; text-decoration: none;
-  border: 1px solid var(--border);
-  transition: all 0.25s; cursor: pointer; font-family: inherit;
-}
+.btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: white; color: var(--text); padding: 14px 32px; border-radius: 99px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid var(--border); transition: all 0.25s; cursor: pointer; font-family: inherit; }
 .btn-secondary:hover { border-color: #ccc; box-shadow: var(--shadow); }
 
-/* ─── STATS ─── */
-.stats {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: var(--border);
-  border: 1px solid var(--border); border-radius: var(--radius-lg);
-  overflow: hidden; margin: 80px 0;
-}
-.stat {
-  background: var(--surface); padding: 40px 32px;
-  text-align: center;
-}
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin: 80px 0; }
+.stat { background: var(--surface); padding: 40px 32px; text-align: center; }
 .stat-value { font-size: 40px; font-weight: 700; letter-spacing: -0.04em; color: var(--text); }
 .stat-label { font-size: 14px; color: var(--muted); margin-top: 6px; }
 
-/* ─── SECTION ─── */
 section { padding: 100px 0; }
-.section-label {
-  font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
-}
-.section-title {
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
-  color: var(--text); margin-bottom: 20px;
-}
-.section-sub {
-  font-size: 17px; color: var(--muted); line-height: 1.7;
-  max-width: 500px;
-}
+.section-label { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+.section-title { font-size: clamp(32px, 4vw, 48px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; color: var(--text); margin-bottom: 20px; }
+.section-sub { font-size: 17px; color: var(--muted); line-height: 1.7; max-width: 500px; }
 
-/* ─── HOW IT WORKS ─── */
+/* HOW IT WORKS */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
-.step {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); padding: 40px 32px;
-  transition: box-shadow 0.3s;
-}
+.step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px 32px; transition: box-shadow 0.3s; }
 .step:hover { box-shadow: var(--shadow-lg); }
-.step-num {
-  font-size: 12px; font-weight: 600; color: var(--muted);
-  letter-spacing: 0.06em; margin-bottom: 20px; display: block;
-}
+.step-num { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 20px; display: block; }
 .step-title { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px; }
 .step-text { font-size: 15px; color: var(--muted); line-height: 1.65; }
 
-/* ─── PRICING ─── */
+/* PRICING */
 .pricing { background: var(--surface); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden; margin-top: 64px; }
 .pricing-header { padding: 40px 48px 32px; border-bottom: 1px solid var(--border); }
 .pricing-header h3 { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
 .pricing-note { font-size: 14px; color: var(--muted); }
 .pricing-plans { display: grid; grid-template-columns: repeat(3, 1fr); }
-.plan {
-  padding: 40px; border-right: 1px solid var(--border);
-  position: relative; transition: background 0.2s;
-}
+.plan { padding: 40px; border-right: 1px solid var(--border); position: relative; }
 .plan:last-child { border-right: none; }
 .plan.popular { background: var(--text); }
-.plan-badge {
-  position: absolute; top: -1px; left: 40px;
-  background: var(--blue); color: white;
-  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 4px 12px; border-radius: 0 0 8px 8px;
-}
+.plan-badge { position: absolute; top: -1px; left: 40px; background: var(--blue); color: white; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 12px; border-radius: 0 0 8px 8px; }
 .plan-name { font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 20px; margin-top: 16px; }
 .plan.popular .plan-name { color: rgba(255,255,255,0.6); }
 .plan-price { font-size: 52px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-bottom: 6px; }
 .plan.popular .plan-price { color: white; }
-.plan-period { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
-.plan.popular .plan-period { color: rgba(255,255,255,0.5); }
 .plan-per { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
 .plan.popular .plan-per { color: rgba(255,255,255,0.5); }
 .plan-features { list-style: none; margin-bottom: 32px; }
-.plan-features li {
-  font-size: 14px; color: var(--muted); padding: 8px 0;
-  border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px;
-}
+.plan-features li { font-size: 14px; color: var(--muted); padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
 .plan.popular .plan-features li { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.1); }
 .plan-features li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
-.plan-btn {
-  display: block; width: 100%; padding: 13px;
-  border-radius: 12px; font-size: 14px; font-weight: 500;
-  text-align: center; cursor: pointer; border: 1px solid var(--border);
-  background: white; color: var(--text); text-decoration: none;
-  transition: all 0.2s; font-family: inherit;
-}
+.plan-btn { display: block; width: 100%; padding: 13px; border-radius: 12px; font-size: 14px; font-weight: 500; text-align: center; cursor: pointer; border: 1px solid var(--border); background: white; color: var(--text); text-decoration: none; transition: all 0.2s; font-family: inherit; }
 .plan-btn:hover { background: var(--accent-light); }
 .plan.popular .plan-btn { background: white; color: var(--text); border-color: white; }
 .plan.popular .plan-btn:hover { background: var(--accent-light); }
 .plan-cost { font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px; }
 .plan.popular .plan-cost { color: rgba(255,255,255,0.4); }
 
-/* ─── GENERATOR ─── */
+/* GENERATOR */
 #generator { scroll-margin-top: 80px; }
-.generator-wrap {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  margin-top: 64px;
-}
-.gen-sidebar {
-  display: grid; grid-template-columns: 1fr 1fr; min-height: 560px;
-}
-.gen-left {
-  padding: 48px; border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; gap: 28px;
-}
-.gen-right {
-  padding: 48px; background: var(--bg);
-  display: flex; flex-direction: column; gap: 24px;
-}
-.gen-title { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
-.gen-subtitle { font-size: 14px; color: var(--muted); }
+.generator-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); margin-top: 64px; }
+
+/* MODE SWITCHER */
+.gen-mode-bar { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+.gen-mode-btn { padding: 20px 32px; font-size: 14px; font-weight: 500; color: var(--muted); background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; transition: all 0.2s; border-bottom: 2px solid transparent; position: relative; }
+.gen-mode-btn.active { color: var(--text); border-bottom-color: var(--text); background: var(--bg); }
+.gen-mode-btn:hover:not(.active) { color: var(--text); background: var(--accent-light); }
+.gen-mode-title { display: block; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 2px; }
+.gen-mode-sub { display: block; font-size: 12px; color: var(--muted); font-weight: 400; }
+.gen-mode-btn.active .gen-mode-sub { color: var(--muted); }
+.gen-mode-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; background: var(--blue); color: white; padding: 2px 7px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
+
+/* GENERATOR BODY */
+.gen-body { display: grid; grid-template-columns: 1fr 1fr; min-height: 520px; }
+.gen-left { padding: 40px 48px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 24px; }
+.gen-right { padding: 40px 48px; background: var(--bg); display: flex; flex-direction: column; gap: 20px; }
 
 .form-group { display: flex; flex-direction: column; gap: 8px; }
 .form-label { font-size: 13px; font-weight: 500; color: var(--text); }
 .form-label span { color: var(--muted); font-weight: 400; margin-left: 4px; }
 
-.textarea-wrap { position: relative; }
-textarea {
-  width: 100%; min-height: 140px; padding: 16px 20px;
-  border: 1.5px solid var(--border); border-radius: 16px;
-  font-family: inherit; font-size: 15px; color: var(--text);
-  background: white; resize: vertical; line-height: 1.6;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  outline: none;
-}
+textarea { width: 100%; min-height: 120px; padding: 16px 20px; border: 1.5px solid var(--border); border-radius: 16px; font-family: inherit; font-size: 15px; color: var(--text); background: white; resize: vertical; line-height: 1.6; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
 textarea:focus { border-color: var(--text); box-shadow: 0 0 0 3px rgba(17,17,16,0.06); }
 textarea::placeholder { color: var(--muted); }
 
-.upload-zone {
-  border: 1.5px dashed var(--border); border-radius: 16px;
-  padding: 32px 20px; text-align: center; cursor: pointer;
-  transition: all 0.2s; background: white; position: relative;
-}
+.upload-zone { border: 1.5px dashed var(--border); border-radius: 16px; padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: white; position: relative; }
 .upload-zone:hover, .upload-zone.drag-over { border-color: var(--text); background: var(--accent-light); }
 .upload-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
 .upload-sub { font-size: 13px; color: var(--muted); }
 .upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 .upload-preview { display: none; position: relative; }
-.upload-preview img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; }
-.upload-remove {
-  position: absolute; top: 8px; right: 8px;
-  background: white; border: 1px solid var(--border);
-  border-radius: 8px; width: 28px; height: 28px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: 14px; color: var(--muted);
-  transition: all 0.2s;
-}
+.upload-preview img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; }
+.upload-remove { position: absolute; top: 8px; right: 8px; background: white; border: 1px solid var(--border); border-radius: 8px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; color: var(--muted); transition: all 0.2s; }
 .upload-remove:hover { color: var(--text); }
 
-.style-select {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
-}
-.style-option {
-  padding: 10px 14px; border: 1.5px solid var(--border);
-  border-radius: 12px; font-size: 13px; cursor: pointer;
-  text-align: center; transition: all 0.2s; background: white;
-  color: var(--muted); font-family: inherit;
-}
+.style-select { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.style-option { padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 12px; font-size: 13px; cursor: pointer; text-align: center; transition: all 0.2s; background: white; color: var(--muted); font-family: inherit; }
 .style-option.active { border-color: var(--text); background: var(--accent-light); color: var(--text); font-weight: 500; }
 .style-option:hover:not(.active) { border-color: #ccc; }
 
-/* ─── PAYMENT MODAL ─── */
-.modal-overlay {
-  position: fixed; inset: 0; z-index: 1000;
-  background: rgba(17,17,16,0.5);
-  backdrop-filter: blur(8px);
-  display: none; align-items: center; justify-content: center; padding: 20px;
-}
-.modal-overlay.open { display: flex; }
-.modal {
-  background: white; border-radius: var(--radius-lg);
-  width: 100%; max-width: 460px;
-  box-shadow: 0 20px 80px rgba(0,0,0,0.2);
-  overflow: hidden; animation: slideUp 0.3s cubic-bezier(0.4,0,0.2,1);
-}
-@keyframes slideUp { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: translateY(0); } }
-.modal-head {
-  padding: 32px 36px 28px;
-  border-bottom: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: flex-start;
-}
-.modal-head h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.03em; }
-.modal-head p { font-size: 14px; color: var(--muted); margin-top: 4px; }
-.modal-close { background: none; border: none; font-size: 20px; color: var(--muted); cursor: pointer; line-height: 1; padding: 4px; }
-.modal-body { padding: 28px 36px; }
-.modal-plan-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 0; border-bottom: 1px solid var(--border);
-  font-size: 15px;
-}
-.modal-plan-row:last-of-type { border-bottom: none; }
-.modal-plan-label { color: var(--muted); }
-.modal-plan-value { font-weight: 600; }
-.modal-total {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 0 0; font-size: 18px; font-weight: 700;
-}
-.yoomoney-btn {
-  display: block; width: 100%;
-  background: #6F36CB; color: white;
-  border: none; border-radius: 14px; padding: 15px;
-  font-size: 15px; font-weight: 600; cursor: pointer;
-  font-family: inherit; text-align: center;
-  transition: all 0.2s; margin-top: 24px; text-decoration: none;
-}
-.yoomoney-btn:hover { background: #5f2bb5; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(111,54,203,0.3); }
-.modal-secure { font-size: 12px; color: var(--muted); text-align: center; margin-top: 14px; }
+/* PACK CARDS LIST */
+.pack-cards-list { display: flex; flex-direction: column; gap: 8px; }
+.pack-card-item { background: white; border: 1.5px solid var(--border); border-radius: 14px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; transition: border-color 0.2s; }
+.pack-card-item.generating { border-color: #ccc; }
+.pack-card-item.done { border-color: #22c55e; }
+.pack-card-item.error { border-color: #ef4444; }
+.pack-card-num { width: 24px; height: 24px; border-radius: 8px; background: var(--accent-light); color: var(--muted); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.pack-card-item.done .pack-card-num { background: #dcfce7; color: #16a34a; }
+.pack-card-item.generating .pack-card-num { background: #fef9c3; color: #ca8a04; }
+.pack-card-item.error .pack-card-num { background: #fee2e2; color: #dc2626; }
+.pack-card-info { flex: 1; min-width: 0; }
+.pack-card-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.pack-card-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.pack-card-status { font-size: 11px; margin-top: 4px; font-weight: 500; }
+.pack-card-item.done .pack-card-status { color: #16a34a; }
+.pack-card-item.generating .pack-card-status { color: #ca8a04; }
+.pack-card-item.error .pack-card-status { color: #dc2626; }
+.pack-card-thumb { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; display: none; flex-shrink: 0; }
+.pack-card-item.done .pack-card-thumb { display: block; }
 
-/* ─── RESULT ─── */
-.gen-result {
-  border: 1.5px solid var(--border); border-radius: 16px;
-  overflow: hidden; background: white; min-height: 300px;
-  display: flex; flex-direction: column;
-}
-.gen-result-placeholder {
-  flex: 1; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 12px; color: var(--muted); padding: 40px;
-  text-align: center;
-}
+/* SINGLE RESULT */
+.gen-result { border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden; background: white; flex: 1; display: flex; flex-direction: column; min-height: 260px; }
+.gen-result-placeholder { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--muted); padding: 40px; text-align: center; }
 .gen-result-placeholder p { font-size: 14px; line-height: 1.6; }
 .result-img { width: 100%; display: none; }
 .result-img img { width: 100%; display: block; }
-.result-img-actions {
-  padding: 16px; display: flex; gap: 8px;
-  border-top: 1px solid var(--border);
-}
-.result-img-actions button, .result-img-actions a {
-  flex: 1; padding: 9px 16px; border-radius: 10px;
-  font-size: 13px; font-weight: 500; cursor: pointer;
-  font-family: inherit; text-align: center; text-decoration: none;
-  transition: all 0.2s;
-}
-.result-img-actions .btn-dl { background: var(--text); color: white; border: none; }
-.result-img-actions .btn-dl:hover { opacity: 0.85; }
-.result-img-actions .btn-regen { background: white; color: var(--text); border: 1px solid var(--border); }
-.result-img-actions .btn-regen:hover { background: var(--accent-light); }
+.result-img-actions { padding: 12px 14px; display: flex; gap: 8px; border-top: 1px solid var(--border); }
+.result-img-actions button, .result-img-actions a { flex: 1; padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; text-align: center; text-decoration: none; transition: all 0.2s; }
+.btn-dl { background: var(--text); color: white; border: none; }
+.btn-dl:hover { opacity: 0.85; }
+.btn-regen { background: white; color: var(--text); border: 1px solid var(--border); }
+.btn-regen:hover { background: var(--accent-light); }
 
-.gen-balance {
-  background: var(--accent-light); border-radius: 12px;
-  padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;
-}
+/* PACK RESULT GRID */
+.pack-result-grid { display: none; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.pack-result-grid.visible { display: grid; }
+.pack-result-cell { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--accent-light); aspect-ratio: 1; position: relative; }
+.pack-result-cell img { width: 100%; height: 100%; object-fit: cover; display: none; }
+.pack-result-cell.loaded img { display: block; }
+.pack-result-cell .cell-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 6px 8px; background: rgba(17,17,16,0.7); color: white; font-size: 10px; font-weight: 500; line-height: 1.3; }
+.pack-result-cell .cell-spinner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.pack-result-cell.loaded .cell-spinner { display: none; }
+.cell-mini-spinner { width: 20px; height: 20px; border: 2px solid rgba(0,0,0,0.1); border-top-color: var(--muted); border-radius: 50%; animation: spin 0.8s linear infinite; }
+
+.pack-download-all { display: none; align-items: center; justify-content: space-between; padding: 12px 16px; background: white; border: 1px solid var(--border); border-radius: 12px; }
+.pack-download-all.visible { display: flex; }
+.pack-dl-info { font-size: 13px; color: var(--muted); }
+.pack-dl-info strong { color: var(--text); }
+.pack-dl-btn { font-size: 13px; font-weight: 500; color: var(--blue); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; background: none; border: none; font-family: inherit; }
+
+/* BALANCE & SUBMIT */
+.gen-balance { background: var(--accent-light); border-radius: 12px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; }
 .balance-label { font-size: 13px; color: var(--muted); }
 .balance-value { font-size: 15px; font-weight: 600; }
 .balance-add { font-size: 13px; color: var(--blue); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
 
-.gen-submit {
-  width: 100%; padding: 15px; border-radius: 14px;
-  background: var(--text); color: white; border: none;
-  font-size: 15px; font-weight: 600; cursor: pointer;
-  font-family: inherit; transition: all 0.25s; letter-spacing: -0.01em;
-}
+.gen-cost-note { font-size: 13px; color: var(--muted); background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+.gen-cost-note strong { color: var(--text); }
+
+.gen-submit { width: 100%; padding: 15px; border-radius: 14px; background: var(--text); color: white; border: none; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.25s; letter-spacing: -0.01em; }
 .gen-submit:hover { opacity: 0.85; transform: translateY(-1px); }
 .gen-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-.generating-spinner {
-  display: none; flex-direction: column; align-items: center;
-  justify-content: center; gap: 16px; padding: 60px 40px;
-  text-align: center;
-}
-.spinner {
-  width: 36px; height: 36px; border: 2.5px solid var(--border);
-  border-top-color: var(--text); border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
+.generating-spinner { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 40px; text-align: center; }
+.spinner { width: 36px; height: 36px; border: 2.5px solid var(--border); border-top-color: var(--text); border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .generating-spinner p { font-size: 14px; color: var(--muted); }
 
-/* ─── FAQ ─── */
-.faq { display: flex; flex-direction: column; gap: 0; margin-top: 48px; }
-.faq-item {
-  border-bottom: 1px solid var(--border); overflow: hidden;
-}
-.faq-question {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 24px 0; cursor: pointer; gap: 20px;
-}
+/* MODAL */
+.modal-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(17,17,16,0.5); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex; }
+.modal { background: white; border-radius: var(--radius-lg); width: 100%; max-width: 460px; box-shadow: 0 20px 80px rgba(0,0,0,0.2); overflow: hidden; animation: slideUp 0.3s cubic-bezier(0.4,0,0.2,1); }
+@keyframes slideUp { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: translateY(0); } }
+.modal-head { padding: 32px 36px 28px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; }
+.modal-head h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.03em; }
+.modal-head p { font-size: 14px; color: var(--muted); margin-top: 4px; }
+.modal-close { background: none; border: none; font-size: 20px; color: var(--muted); cursor: pointer; line-height: 1; padding: 4px; }
+.modal-body { padding: 28px 36px; }
+.modal-plan-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+.modal-plan-row:last-of-type { border-bottom: none; }
+.modal-plan-label { color: var(--muted); }
+.modal-plan-value { font-weight: 600; }
+.modal-total { display: flex; justify-content: space-between; align-items: center; padding: 20px 0 0; font-size: 18px; font-weight: 700; }
+.yoomoney-btn { display: block; width: 100%; background: #6F36CB; color: white; border: none; border-radius: 14px; padding: 15px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; text-align: center; transition: all 0.2s; margin-top: 24px; text-decoration: none; }
+.yoomoney-btn:hover { background: #5f2bb5; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(111,54,203,0.3); }
+.modal-secure { font-size: 12px; color: var(--muted); text-align: center; margin-top: 14px; }
+
+/* FAQ */
+.faq { display: flex; flex-direction: column; margin-top: 48px; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-question { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; cursor: pointer; gap: 20px; }
 .faq-question h4 { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; }
-.faq-toggle {
-  width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; font-size: 16px; color: var(--muted); transition: all 0.2s;
-  background: white; cursor: pointer;
-}
+.faq-toggle { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; color: var(--muted); transition: all 0.2s; background: white; cursor: pointer; }
 .faq-item.open .faq-toggle { transform: rotate(45deg); background: var(--text); color: white; border-color: var(--text); }
-.faq-answer {
-  max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease;
-  font-size: 15px; color: var(--muted); line-height: 1.7;
-}
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; font-size: 15px; color: var(--muted); line-height: 1.7; }
 .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 24px; }
 
-/* ─── FOOTER ─── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 60px 0;
-}
-.footer-inner {
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 24px;
-}
+/* FOOTER */
+footer { border-top: 1px solid var(--border); padding: 60px 0; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
 .footer-brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
 .footer-tagline { font-size: 13px; color: var(--muted); margin-top: 4px; }
 .footer-links { display: flex; gap: 24px; }
 .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--text); }
 
-/* ─── NOTIFICATIONS ─── */
-.toast {
-  position: fixed; bottom: 24px; right: 24px; z-index: 2000;
-  background: var(--text); color: white;
-  padding: 14px 20px; border-radius: 14px;
-  font-size: 14px; box-shadow: var(--shadow-lg);
-  transform: translateY(80px); opacity: 0;
-  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-  max-width: 320px; line-height: 1.5;
-}
+/* TOAST */
+.toast { position: fixed; bottom: 24px; right: 24px; z-index: 2000; background: var(--text); color: white; padding: 14px 20px; border-radius: 14px; font-size: 14px; box-shadow: var(--shadow-lg); transform: translateY(80px); opacity: 0; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); max-width: 320px; line-height: 1.5; }
 .toast.show { transform: translateY(0); opacity: 1; }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .gen-sidebar { grid-template-columns: 1fr; }
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .gen-body { grid-template-columns: 1fr; }
   .gen-right { border-top: 1px solid var(--border); }
+  .pack-result-grid { grid-template-columns: repeat(3, 1fr); }
   .pricing-plans { grid-template-columns: 1fr; }
   .plan { border-right: none; border-bottom: 1px solid var(--border); }
   .plan:last-child { border-bottom: none; }
   .steps { grid-template-columns: 1fr; }
   .stats { grid-template-columns: 1fr; }
+  .gen-mode-bar { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .hero { padding: 120px 0 80px; }
   .hero h1 { font-size: 40px; }
   section { padding: 72px 0; }
-  .gen-left, .gen-right { padding: 28px; }
+  .gen-left, .gen-right { padding: 24px; }
   .nav-links a:not(.nav-cta) { display: none; }
+  .pack-result-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="wrap">
     <a href="/" class="nav-logo">Карточки</a>
@@ -459,78 +282,99 @@ footer {
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="wrap">
     <div class="hero-badge">AI-генерация изображений для маркетплейсов</div>
     <h1>Карточки для Wildberries<br><em>и Ozon за одну минуту</em></h1>
-    <p class="hero-sub">Создайте профессиональные фотографии товара без фотостудии, дизайнера и подписок. Одна генерация — 59 рублей.</p>
+    <p class="hero-sub">Создайте полный комплект из 5 карточек товара без фотостудии и дизайнера. Один запрос — и весь листинг готов.</p>
     <div class="hero-actions">
       <a href="#generator" class="btn-primary">Попробовать бесплатно</a>
       <a href="#pricing" class="btn-secondary">Посмотреть тарифы</a>
     </div>
-
     <div class="stats">
-      <div class="stat">
-        <div class="stat-value">59 ₽</div>
-        <div class="stat-label">за одно изображение</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">~60 сек</div>
-        <div class="stat-label">время генерации</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">1024px</div>
-        <div class="stat-label">разрешение на выходе</div>
-      </div>
+      <div class="stat"><div class="stat-value">59 ₽</div><div class="stat-label">одна карточка</div></div>
+      <div class="stat"><div class="stat-value">199 ₽</div><div class="stat-label">полный комплект 5 шт</div></div>
+      <div class="stat"><div class="stat-value">1024px</div><div class="stat-label">разрешение на выходе</div></div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section id="how">
   <div class="wrap">
     <div class="section-label">Процесс</div>
-    <h2 class="section-title">Три шага до<br>готовой карточки</h2>
-    <p class="section-sub">Никаких сложных настроек. Описали товар — получили изображение.</p>
-
+    <h2 class="section-title">Один запрос —<br>готовый листинг</h2>
+    <p class="section-sub">Опишите товар один раз, и AI создаст все нужные карточки по структуре маркетплейса.</p>
     <div class="steps">
       <div class="step">
         <span class="step-num">01</span>
         <h3 class="step-title">Опишите товар</h3>
-        <p class="step-text">Напишите, что хотите увидеть на карточке. Или загрузите пример — нейросеть поймёт стиль и адаптирует его.</p>
+        <p class="step-text">Напишите название, материал, цвет и особенности. Или загрузите фото упаковки — AI поймёт сам.</p>
       </div>
       <div class="step">
         <span class="step-num">02</span>
-        <h3 class="step-title">Оплатите генерацию</h3>
-        <p class="step-text">Выберите одну картинку или пакет. Оплата через ЮMoney — быстро и привычно, без иностранных карт.</p>
+        <h3 class="step-title">Выберите режим</h3>
+        <p class="step-text">Одна карточка или полный комплект из 5 — главное фото, характеристики, три блока преимуществ.</p>
       </div>
       <div class="step">
         <span class="step-num">03</span>
-        <h3 class="step-title">Скачайте результат</h3>
-        <p class="step-text">Готовое изображение в высоком разрешении. Если не понравилось — перегенерируйте с новым описанием.</p>
+        <h3 class="step-title">Скачайте и загрузите</h3>
+        <p class="step-text">Все изображения сразу одним архивом или по одному. Готово к загрузке на WB и Ozon.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
+<!-- CARD STRUCTURE EXPLAINER -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="section-label">Структура комплекта</div>
+    <h2 class="section-title">Что входит<br>в 5 карточек</h2>
+    <p class="section-sub">Стандартная структура листинга, которую используют топовые продавцы на маркетплейсах.</p>
+    <div style="display:grid; grid-template-columns: repeat(5,1fr); gap:12px; margin-top:48px;">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px 20px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--muted);margin-bottom:12px;">КАРТОЧКА 1</div>
+        <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em;margin-bottom:8px;">Главное фото</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.5;">Товар с упаковкой, ключевые характеристики крупно, белый фон</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px 20px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--muted);margin-bottom:12px;">КАРТОЧКА 2</div>
+        <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em;margin-bottom:8px;">Характеристики</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.5;">Инфографика с размерами, составом, техническими параметрами</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px 20px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--muted);margin-bottom:12px;">КАРТОЧКА 3</div>
+        <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em;margin-bottom:8px;">Преимущество 1</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.5;">Главная польза товара, лайфстайл-фото в использовании</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px 20px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--muted);margin-bottom:12px;">КАРТОЧКА 4</div>
+        <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em;margin-bottom:8px;">Преимущество 2</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.5;">Детальный крупный план, материал и качество исполнения</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px 20px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--muted);margin-bottom:12px;">КАРТОЧКА 5</div>
+        <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em;margin-bottom:8px;">Контекст</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.5;">Товар в реальной обстановке, эмоциональная сцена использования</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="pricing">
   <div class="wrap">
     <div class="section-label">Тарифы</div>
     <h2 class="section-title">Платите только<br>за то, что нужно</h2>
     <p class="section-sub">Нет подписок, нет списаний. Купили — пользуетесь, пока не израсходуете.</p>
-
     <div class="pricing">
       <div class="pricing-header">
         <h3>Стоимость генерации</h3>
         <p class="pricing-note">Себестоимость одной генерации через OpenRouter API — около 4 рублей. Цены включают все расходы на инфраструктуру.</p>
       </div>
       <div class="pricing-plans">
-        <div class="plan" data-plan="single" data-price="59" data-count="1">
+        <div class="plan">
           <div class="plan-name">Разовая</div>
           <div class="plan-price">59 <span style="font-size:24px;">₽</span></div>
-          <div class="plan-per">1 изображение</div>
+          <div class="plan-per">1 карточка</div>
           <ul class="plan-features">
             <li>1 генерация</li>
             <li>Разрешение 1024×1024</li>
@@ -538,34 +382,34 @@ footer {
             <li>Действует 30 дней</li>
           </ul>
           <button class="plan-btn" onclick="openPayment('single', 59, 1)">Оплатить</button>
-          <div class="plan-cost">59 ₽ / генерация</div>
+          <div class="plan-cost">59 ₽ / карточка</div>
         </div>
-        <div class="plan popular" data-plan="pack5" data-price="249" data-count="5">
-          <div class="plan-badge">Популярное</div>
-          <div class="plan-name">Стартовый</div>
-          <div class="plan-price">249 <span style="font-size:24px; color:rgba(255,255,255,0.6);">₽</span></div>
-          <div class="plan-per">5 изображений</div>
+        <div class="plan popular">
+          <div class="plan-badge">Выгодно</div>
+          <div class="plan-name">Комплект</div>
+          <div class="plan-price">199 <span style="font-size:24px; color:rgba(255,255,255,0.6);">₽</span></div>
+          <div class="plan-per">5 карточек для одного товара</div>
           <ul class="plan-features">
-            <li>5 генераций</li>
-            <li>Разрешение 1024×1024</li>
-            <li>Скачать PNG</li>
+            <li>5 генераций сразу</li>
+            <li>Структура листинга WB/Ozon</li>
+            <li>Скачать все одним ZIP</li>
             <li>Действует 60 дней</li>
           </ul>
-          <button class="plan-btn" onclick="openPayment('pack5', 249, 5)">Оплатить</button>
-          <div class="plan-cost">49.8 ₽ / генерация</div>
+          <button class="plan-btn" onclick="openPayment('pack5', 199, 5)">Оплатить</button>
+          <div class="plan-cost">39.8 ₽ / карточка</div>
         </div>
-        <div class="plan" data-plan="pack15" data-price="649" data-count="15">
+        <div class="plan">
           <div class="plan-name">Профи</div>
           <div class="plan-price">649 <span style="font-size:24px;">₽</span></div>
-          <div class="plan-per">15 изображений</div>
+          <div class="plan-per">20 генераций (4 товара)</div>
           <ul class="plan-features">
-            <li>15 генераций</li>
+            <li>20 генераций</li>
             <li>Разрешение 1024×1024</li>
-            <li>Скачать PNG</li>
+            <li>Скачать PNG / ZIP</li>
             <li>Действует 90 дней</li>
           </ul>
-          <button class="plan-btn" onclick="openPayment('pack15', 649, 15)">Оплатить</button>
-          <div class="plan-cost">43.3 ₽ / генерация</div>
+          <button class="plan-btn" onclick="openPayment('pack20', 649, 20)">Оплатить</button>
+          <div class="plan-cost">32.5 ₽ / карточка</div>
         </div>
       </div>
     </div>
@@ -576,26 +420,38 @@ footer {
 <section id="generator">
   <div class="wrap">
     <div class="section-label">Генератор</div>
-    <h2 class="section-title">Создайте карточку<br>прямо сейчас</h2>
+    <h2 class="section-title">Создайте карточки<br>прямо сейчас</h2>
     <p class="section-sub">Первая генерация — бесплатно. Попробуйте без регистрации.</p>
 
     <div class="generator-wrap">
-      <div class="gen-sidebar">
+      <!-- MODE SWITCHER -->
+      <div class="gen-mode-bar">
+        <button class="gen-mode-btn active" id="modeSingle" onclick="setMode('single')">
+          <span class="gen-mode-title">Одна карточка</span>
+          <span class="gen-mode-sub">1 генерация — 59 ₽</span>
+        </button>
+        <button class="gen-mode-btn" id="modePack" onclick="setMode('pack')">
+          <span class="gen-mode-title">Полный комплект <span class="gen-mode-tag">Выгодно</span></span>
+          <span class="gen-mode-sub">5 карточек для одного товара — 199 ₽</span>
+        </button>
+      </div>
+
+      <div class="gen-body">
+        <!-- LEFT: FORM -->
         <div class="gen-left">
           <div>
-            <div class="gen-title">Опишите карточку</div>
-            <div class="gen-subtitle" style="margin-top:6px;">Чем точнее описание — тем лучше результат</div>
+            <div style="font-size:18px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px;">Опишите товар</div>
+            <div style="font-size:14px;color:var(--muted);">Чем точнее описание — тем лучше результат</div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Описание товара <span>обязательно</span></label>
-            <div class="textarea-wrap">
-              <textarea id="prompt" placeholder="Например: белая керамическая кружка на деревянном столе, минималистичный стиль, мягкий студийный свет, белый фон, вид спереди"></textarea>
-            </div>
+            <textarea id="prompt" placeholder="Например: белая керамическая кружка 350 мл, скандинавский стиль, матовое покрытие, логотип на боку, подарочная упаковка"></textarea>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">Стиль фотографии</label>
+          <!-- Style selector (only for single mode) -->
+          <div class="form-group" id="styleGroup">
+            <label class="form-label">Стиль карточки</label>
             <div class="style-select">
               <button class="style-option active" data-style="studio" onclick="setStyle(this)">Студийный</button>
               <button class="style-option" data-style="lifestyle" onclick="setStyle(this)">Лайфстайл</button>
@@ -605,7 +461,7 @@ footer {
           </div>
 
           <div class="form-group">
-            <label class="form-label">Пример <span>необязательно</span></label>
+            <label class="form-label">Пример / референс <span>необязательно</span></label>
             <div class="upload-zone" id="uploadZone">
               <input type="file" id="fileInput" accept="image/*" onchange="handleFileUpload(this)">
               <div class="upload-title">Загрузите пример</div>
@@ -618,108 +474,134 @@ footer {
           </div>
         </div>
 
+        <!-- RIGHT: RESULT -->
         <div class="gen-right">
           <div class="gen-balance">
             <div>
               <div class="balance-label">Баланс генераций</div>
               <div class="balance-value" id="balanceDisplay">1 бесплатная</div>
             </div>
-            <span class="balance-add" onclick="openPayment('pack5', 249, 5)">Пополнить</span>
+            <span class="balance-add" onclick="openPayment('pack5', 199, 5)">Пополнить</span>
           </div>
 
-          <div class="gen-result" id="genResult">
-            <div class="gen-result-placeholder" id="resultPlaceholder">
-              <div style="width:56px; height:56px; border-radius:16px; background:var(--accent-light); display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--muted);">
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <div class="gen-cost-note" id="costNote">
+            <span>Спишется за генерацию</span>
+            <strong id="costValue">1 генерация</strong>
+          </div>
+
+          <!-- SINGLE MODE RESULT -->
+          <div id="singleResult">
+            <div class="gen-result" id="genResult">
+              <div class="gen-result-placeholder" id="resultPlaceholder">
+                <div style="width:52px;height:52px;border-radius:14px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;color:var(--muted);">
+                  <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                </div>
+                <p>Здесь появится<br>сгенерированная карточка</p>
               </div>
-              <p>Здесь появится ваша<br>сгенерированная карточка</p>
-            </div>
-            <div class="generating-spinner" id="spinner">
-              <div class="spinner"></div>
-              <p>Генерируем изображение...<br>обычно занимает 30–60 секунд</p>
-            </div>
-            <div class="result-img" id="resultImg">
-              <img id="resultImgEl" src="" alt="Сгенерированное изображение">
-              <div class="result-img-actions">
-                <a id="downloadBtn" href="#" class="btn-dl" download="card.png">Скачать PNG</a>
-                <button class="btn-regen" onclick="regenerate()">Другой вариант</button>
+              <div class="generating-spinner" id="spinner">
+                <div class="spinner"></div>
+                <p>Генерируем изображение...<br>обычно 30–60 секунд</p>
               </div>
+              <div class="result-img" id="resultImg">
+                <img id="resultImgEl" src="" alt="">
+                <div class="result-img-actions">
+                  <a id="downloadBtn" href="#" class="btn-dl" download="card.png">Скачать PNG</a>
+                  <button class="btn-regen" onclick="regenerate()">Другой вариант</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PACK MODE RESULT -->
+          <div id="packResult" style="display:none; flex-direction:column; gap:16px;">
+            <!-- Progress list -->
+            <div class="pack-cards-list" id="packCardsList">
+              <div class="pack-card-item" id="pci-0">
+                <div class="pack-card-num">1</div>
+                <div class="pack-card-info">
+                  <div class="pack-card-title">Главное фото</div>
+                  <div class="pack-card-desc">Товар с упаковкой, ключевые характеристики, белый фон</div>
+                  <div class="pack-card-status" id="pcs-0"></div>
+                </div>
+                <img class="pack-card-thumb" id="pct-0" src="" alt="">
+              </div>
+              <div class="pack-card-item" id="pci-1">
+                <div class="pack-card-num">2</div>
+                <div class="pack-card-info">
+                  <div class="pack-card-title">Характеристики</div>
+                  <div class="pack-card-desc">Инфографика с параметрами и размерами</div>
+                  <div class="pack-card-status" id="pcs-1"></div>
+                </div>
+                <img class="pack-card-thumb" id="pct-1" src="" alt="">
+              </div>
+              <div class="pack-card-item" id="pci-2">
+                <div class="pack-card-num">3</div>
+                <div class="pack-card-info">
+                  <div class="pack-card-title">Преимущество 1</div>
+                  <div class="pack-card-desc">Главная польза, лайфстайл в использовании</div>
+                  <div class="pack-card-status" id="pcs-2"></div>
+                </div>
+                <img class="pack-card-thumb" id="pct-2" src="" alt="">
+              </div>
+              <div class="pack-card-item" id="pci-3">
+                <div class="pack-card-num">4</div>
+                <div class="pack-card-info">
+                  <div class="pack-card-title">Преимущество 2</div>
+                  <div class="pack-card-desc">Крупный план, материал и качество</div>
+                  <div class="pack-card-status" id="pcs-3"></div>
+                </div>
+                <img class="pack-card-thumb" id="pct-3" src="" alt="">
+              </div>
+              <div class="pack-card-item" id="pci-4">
+                <div class="pack-card-num">5</div>
+                <div class="pack-card-info">
+                  <div class="pack-card-title">Контекст</div>
+                  <div class="pack-card-desc">Товар в обстановке, эмоциональная сцена</div>
+                  <div class="pack-card-status" id="pcs-4"></div>
+                </div>
+                <img class="pack-card-thumb" id="pct-4" src="" alt="">
+              </div>
+            </div>
+
+            <!-- Result thumbnails -->
+            <div class="pack-result-grid" id="packGrid"></div>
+
+            <!-- Download all -->
+            <div class="pack-download-all" id="packDownloadAll">
+              <div class="pack-dl-info">Готово <strong id="packDoneCount">0</strong> из 5 карточек</div>
+              <button class="pack-dl-btn" onclick="downloadAll()">Скачать все</button>
             </div>
           </div>
 
           <button class="gen-submit" id="generateBtn" onclick="generate()">Сгенерировать карточку</button>
-          <div style="font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">
-            Нажимая кнопку, вы соглашаетесь с условиями использования сервиса.
-          </div>
+          <div style="font-size:12px;color:var(--muted);text-align:center;line-height:1.5;">Нажимая кнопку, вы соглашаетесь с условиями использования сервиса.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
 <section id="faq">
   <div class="wrap">
     <div class="section-label">Вопросы</div>
     <h2 class="section-title">Часто спрашивают</h2>
-
     <div class="faq">
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h4>Как это работает технически?</h4>
-          <button class="faq-toggle">+</button>
-        </div>
-        <div class="faq-answer">Мы используем GPT Image Generation через OpenRouter API — на сегодня это одна из лучших моделей для генерации товарных изображений. После оплаты и ввода описания запрос уходит в нейросеть, и вы получаете готовое изображение в разрешении 1024×1024.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h4>Почему это дешевле, чем покупать подписку?</h4>
-          <button class="faq-toggle">+</button>
-        </div>
-        <div class="faq-answer">Зарубежные сервисы с подпиской стоят от 2000 рублей в месяц, и часто требуют иностранную карту. Наш сервис работает в России, принимает оплату через ЮMoney и даёт возможность купить ровно столько генераций, сколько нужно прямо сейчас — без переплаты.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h4>Как написать хорошее описание для карточки?</h4>
-          <button class="faq-toggle">+</button>
-        </div>
-        <div class="faq-answer">Укажите: что за товар, цвет и материал, стиль фотографии (белый фон, лайфстайл, минимализм), освещение, ракурс. Пример: «чёрный рюкзак из нейлона, студийный свет, белый фон, вид спереди, вид сбоку». Чем точнее — тем лучше результат.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h4>Что делать, если результат не понравился?</h4>
-          <button class="faq-toggle">+</button>
-        </div>
-        <div class="faq-answer">Каждая попытка списывает одну генерацию. Если результат не устраивает — переформулируйте описание и попробуйте снова. Многие продавцы делают 2–3 попытки, чтобы найти идеальный вариант, поэтому брать пакет на 5–15 генераций выгоднее.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h4>Безопасна ли оплата через ЮMoney?</h4>
-          <button class="faq-toggle">+</button>
-        </div>
-        <div class="faq-answer">Да, ЮMoney — официальная российская платёжная система, принадлежащая Яндексу. Платёж защищён SSL-шифрованием. Мы не храним данные вашей карты — всё обрабатывается на стороне ЮMoney.</div>
-      </div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h4>Как работает режим «Полный комплект»?</h4><button class="faq-toggle">+</button></div><div class="faq-answer">Вы вводите описание товара один раз. AI автоматически создаёт 5 разных карточек по стандартной структуре маркетплейса: главное фото с упаковкой, инфографика с характеристиками, два блока преимуществ и эмоциональная сцена использования. Карточки генерируются последовательно — можно наблюдать за процессом.</div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h4>Сколько стоит полный комплект из 5 карточек?</h4><button class="faq-toggle">+</button></div><div class="faq-answer">Полный комплект стоит 199 ₽ — это 5 генераций по 39.8 ₽ каждая. Для сравнения, одна карточка отдельно — 59 ₽. Покупать комплект значительно выгоднее, если нужно оформить товар полностью.</div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h4>Как написать хорошее описание товара?</h4><button class="faq-toggle">+</button></div><div class="faq-answer">Укажите: что за товар, материал и цвет, размер или объём, ключевые особенности. Пример: «белая керамическая кружка 350 мл, матовое покрытие, скандинавский стиль, подарочная коробка». Чем конкретнее — тем точнее AI попадёт в нужный образ.</div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h4>Почему это дешевле подписки на зарубежные сервисы?</h4><button class="faq-toggle">+</button></div><div class="faq-answer">Зарубежные сервисы стоят от 2000 ₽ в месяц и требуют иностранную карту. Наш сервис работает в России, принимает оплату через ЮMoney и позволяет купить ровно столько генераций, сколько нужно прямо сейчас — без переплаты за неиспользованное.</div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h4>Что делать, если карточка не понравилась?</h4><button class="faq-toggle">+</button></div><div class="faq-answer">Каждая попытка списывает одну генерацию. Переформулируйте описание и сгенерируйте снова. Обычно 2–3 попытки достаточно для хорошего результата. Поэтому брать пакет на 20 генераций выгоднее, если работаете с несколькими товарами.</div></div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="footer-inner">
-      <div>
-        <div class="footer-brand">Карточки</div>
-        <div class="footer-tagline">AI-генерация для маркетплейсов</div>
-      </div>
-      <div class="footer-links">
-        <a href="#">Условия использования</a>
-        <a href="#">Политика конфиденциальности</a>
-        <a href="mailto:support@example.com">Поддержка</a>
-      </div>
+      <div><div class="footer-brand">Карточки</div><div class="footer-tagline">AI-генерация для маркетплейсов</div></div>
+      <div class="footer-links"><a href="#">Условия использования</a><a href="#">Конфиденциальность</a><a href="mailto:support@example.com">Поддержка</a></div>
     </div>
-    <div style="margin-top:32px; padding-top:24px; border-top:1px solid var(--border); font-size:13px; color:var(--muted);">
-      Сервис использует GPT Image Generation через OpenRouter API. Оплата через ЮMoney.
-    </div>
+    <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);">Сервис использует GPT Image Generation через OpenRouter API. Оплата через ЮMoney.</div>
   </div>
 </footer>
 
@@ -727,36 +609,19 @@ footer {
 <div class="modal-overlay" id="paymentModal" onclick="closePaymentOnOverlay(event)">
   <div class="modal">
     <div class="modal-head">
-      <div>
-        <h3>Оплата</h3>
-        <p id="modalPlanDesc">Стартовый пакет — 5 генераций</p>
-      </div>
+      <div><h3>Оплата</h3><p id="modalPlanDesc">Стартовый пакет</p></div>
       <button class="modal-close" onclick="closePayment()">×</button>
     </div>
     <div class="modal-body">
-      <div class="modal-plan-row">
-        <span class="modal-plan-label">Тариф</span>
-        <span class="modal-plan-value" id="modalPlanName">Стартовый</span>
-      </div>
-      <div class="modal-plan-row">
-        <span class="modal-plan-label">Количество генераций</span>
-        <span class="modal-plan-value" id="modalPlanCount">5 шт</span>
-      </div>
-      <div class="modal-plan-row">
-        <span class="modal-plan-label">Стоимость одной генерации</span>
-        <span class="modal-plan-value" id="modalPlanPer">49.8 ₽</span>
-      </div>
-      <div class="modal-total">
-        <span>Итого</span>
-        <span id="modalPlanPrice">249 ₽</span>
-      </div>
-
-      <!-- YooMoney payment form -->
+      <div class="modal-plan-row"><span class="modal-plan-label">Тариф</span><span class="modal-plan-value" id="modalPlanName"></span></div>
+      <div class="modal-plan-row"><span class="modal-plan-label">Количество генераций</span><span class="modal-plan-value" id="modalPlanCount"></span></div>
+      <div class="modal-plan-row"><span class="modal-plan-label">Стоимость одной</span><span class="modal-plan-value" id="modalPlanPer"></span></div>
+      <div class="modal-total"><span>Итого</span><span id="modalPlanPrice"></span></div>
       <form id="yoomoneyForm" method="POST" action="https://yoomoney.ru/quickpay/confirm.xml" target="_blank">
         <input type="hidden" name="receiver" id="ym_receiver" value="ВАШ_НОМЕР_КОШЕЛЬКА">
         <input type="hidden" name="quickpay-form" value="button">
         <input type="hidden" name="targets" id="ym_targets" value="Генерация карточки">
-        <input type="hidden" name="sum" id="ym_sum" value="249">
+        <input type="hidden" name="sum" id="ym_sum" value="199">
         <input type="hidden" name="label" id="ym_label" value="">
         <input type="hidden" name="successURL" value="">
         <button type="submit" class="yoomoney-btn">Оплатить через ЮMoney</button>
@@ -766,36 +631,56 @@ footer {
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
 // ─── STATE ───
-let balance = 1; // free generation
+let balance = 1;
 let selectedStyle = 'studio';
 let uploadedFile = null;
-let currentPlan = null;
+let currentMode = 'single';
+let packUrls = [];
 
-// ─── STYLE SELECT ───
+const PACK_SLOTS = [
+  { title: 'Главное фото', prompt: 'main product photo with original packaging, key specifications text overlay, pure white background, professional studio lighting, sharp focus, product centered, marketplace hero image' },
+  { title: 'Характеристики', prompt: 'product infographic card, clean white background, specifications and dimensions shown with icons and text, technical parameters highlighted, flat design style, marketplace listing' },
+  { title: 'Преимущество 1', prompt: 'lifestyle product photography showing main benefit in use, natural warm light, cozy real-world environment, editorial style, person using product, emotional connection' },
+  { title: 'Преимущество 2', prompt: 'extreme close-up macro product detail shot, material texture visible, premium quality craftsmanship, soft studio lighting, white or neutral background, luxury feel' },
+  { title: 'Контекст', prompt: 'product in beautiful real-life setting, aspirational lifestyle scene, soft natural light, styled flat lay or environmental shot, emotional and inviting atmosphere' }
+];
+
+// ─── MODE ───
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('modeSingle').classList.toggle('active', mode === 'single');
+  document.getElementById('modePack').classList.toggle('active', mode === 'pack');
+  document.getElementById('styleGroup').style.display = mode === 'single' ? 'flex' : 'none';
+  document.getElementById('singleResult').style.display = mode === 'single' ? 'block' : 'none';
+  document.getElementById('packResult').style.display = mode === 'pack' ? 'flex' : 'none';
+  document.getElementById('generateBtn').textContent = mode === 'single' ? 'Сгенерировать карточку' : 'Сгенерировать 5 карточек';
+  document.getElementById('costValue').textContent = mode === 'single' ? '1 генерация' : '5 генераций';
+  resetPackUI();
+}
+
+// ─── STYLE ───
 function setStyle(el) {
   document.querySelectorAll('.style-option').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   selectedStyle = el.dataset.style;
 }
 
-// ─── FILE UPLOAD ───
+// ─── UPLOAD ───
 function handleFileUpload(input) {
-  const file = input.files[0];
-  if (!file) return;
-  if (file.size > 10 * 1024 * 1024) { showToast('Файл слишком большой. Максимум 10 МБ.'); return; }
+  const file = input.files[0]; if (!file) return;
+  if (file.size > 10485760) { showToast('Файл слишком большой. Максимум 10 МБ.'); return; }
   uploadedFile = file;
-  const reader = new FileReader();
-  reader.onload = e => {
+  const r = new FileReader();
+  r.onload = e => {
     document.getElementById('previewImg').src = e.target.result;
     document.getElementById('uploadZone').style.display = 'none';
     document.getElementById('uploadPreview').style.display = 'block';
   };
-  reader.readAsDataURL(file);
+  r.readAsDataURL(file);
 }
 
 function removeUpload() {
@@ -806,29 +691,38 @@ function removeUpload() {
   document.getElementById('uploadPreview').style.display = 'none';
 }
 
-// drag-over styling
 const zone = document.getElementById('uploadZone');
 zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
 zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
 zone.addEventListener('drop', e => {
   e.preventDefault(); zone.classList.remove('drag-over');
   const file = e.dataTransfer.files[0];
-  if (file && file.type.startsWith('image/')) {
-    document.getElementById('fileInput').files = e.dataTransfer.files;
-    handleFileUpload(document.getElementById('fileInput'));
-  }
+  if (file && file.type.startsWith('image/')) { document.getElementById('fileInput').files = e.dataTransfer.files; handleFileUpload(document.getElementById('fileInput')); }
 });
 
 // ─── GENERATE ───
 async function generate() {
   const prompt = document.getElementById('prompt').value.trim();
   if (!prompt) { showToast('Пожалуйста, опишите товар перед генерацией.'); return; }
-  if (balance <= 0) { openPayment('pack5', 249, 5); return; }
+  const cost = currentMode === 'pack' ? 5 : 1;
+  if (balance < cost) { openPayment('pack5', 199, 5); return; }
 
   const btn = document.getElementById('generateBtn');
   btn.disabled = true;
-  btn.textContent = 'Генерируем...';
+  btn.textContent = currentMode === 'pack' ? 'Генерируем...' : 'Генерируем...';
 
+  if (currentMode === 'single') {
+    await generateSingle(prompt);
+  } else {
+    await generatePack(prompt);
+  }
+
+  btn.disabled = false;
+  btn.textContent = currentMode === 'single' ? 'Сгенерировать карточку' : 'Сгенерировать 5 карточек';
+}
+
+// SINGLE
+async function generateSingle(prompt) {
   document.getElementById('resultPlaceholder').style.display = 'none';
   document.getElementById('resultImg').style.display = 'none';
   document.getElementById('spinner').style.display = 'flex';
@@ -839,168 +733,187 @@ async function generate() {
     infographic: 'product infographic, clean design, white background, product features highlighted',
     minimal: 'minimalist product photography, clean composition, soft shadows, pastel background'
   };
-  const fullPrompt = `${prompt}, ${styleMap[selectedStyle]}, marketplace product card, high quality, 4K`;
+  const fullPrompt = `${prompt}, ${styleMap[selectedStyle]}, marketplace product card, high quality`;
 
   try {
-    const apiKey = getApiKey();
-    if (!apiKey) {
-      // Demo mode — show placeholder
-      await demoGenerate(prompt);
-      return;
-    }
-
-    const res = await fetch('https://openrouter.ai/api/v1/images/generations', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': window.location.origin,
-        'X-Title': 'Карточки для маркетплейсов'
-      },
-      body: JSON.stringify({
-        model: 'openai/gpt-image-1',
-        prompt: fullPrompt,
-        n: 1,
-        size: '1024x1024',
-        quality: 'standard'
-      })
-    });
-
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error?.message || `Ошибка API: ${res.status}`);
-    }
-
-    const data = await res.json();
-    const imageUrl = data.data?.[0]?.url || data.data?.[0]?.b64_json;
-
-    if (!imageUrl) throw new Error('Изображение не получено');
-
-    balance--;
-    updateBalance();
-    showResult(imageUrl.startsWith('data:') ? imageUrl : imageUrl);
+    const url = await callApi(fullPrompt);
+    balance--; updateBalance();
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('resultImgEl').src = url;
+    document.getElementById('downloadBtn').href = url;
+    document.getElementById('resultImg').style.display = 'block';
   } catch (e) {
     document.getElementById('spinner').style.display = 'none';
     document.getElementById('resultPlaceholder').style.display = 'flex';
     showToast(e.message || 'Произошла ошибка. Попробуйте ещё раз.');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Сгенерировать карточку';
   }
 }
 
-async function demoGenerate(prompt) {
-  await new Promise(r => setTimeout(r, 2000));
-  // Use a placeholder image service for demo
-  const seed = Math.abs(hashCode(prompt)) % 1000;
-  const demoUrl = `https://picsum.photos/seed/${seed}/1024/1024`;
-  balance--;
-  updateBalance();
-  showResult(demoUrl);
-  showToast('Демо-режим: добавьте ключ OpenRouter для реальной генерации.');
+// PACK
+async function generatePack(productDesc) {
+  packUrls = [];
+  resetPackUI();
+  document.getElementById('packGrid').innerHTML = '';
+  document.getElementById('packGrid').classList.remove('visible');
+  document.getElementById('packDownloadAll').classList.remove('visible');
+
+  // Pre-build grid cells
+  const grid = document.getElementById('packGrid');
+  grid.innerHTML = '';
+  PACK_SLOTS.forEach((slot, i) => {
+    const cell = document.createElement('div');
+    cell.className = 'pack-result-cell';
+    cell.id = `pgc-${i}`;
+    cell.innerHTML = `<div class="cell-spinner"><div class="cell-mini-spinner"></div></div><img id="pgi-${i}" src="" alt=""><div class="cell-label">${slot.title}</div>`;
+    grid.appendChild(cell);
+  });
+  grid.classList.add('visible');
+
+  let doneCount = 0;
+  balance -= 5; updateBalance();
+
+  for (let i = 0; i < PACK_SLOTS.length; i++) {
+    const slot = PACK_SLOTS[i];
+    setPackCardState(i, 'generating', 'Генерируем...');
+
+    try {
+      const fullPrompt = `${productDesc}, ${slot.prompt}`;
+      const url = await callApi(fullPrompt);
+      packUrls[i] = url;
+      doneCount++;
+
+      // Update thumb in list
+      const thumb = document.getElementById(`pct-${i}`);
+      thumb.src = url;
+      setPackCardState(i, 'done', 'Готово');
+
+      // Update grid cell
+      const cell = document.getElementById(`pgc-${i}`);
+      const img = document.getElementById(`pgi-${i}`);
+      img.src = url;
+      cell.classList.add('loaded');
+
+      // Update download bar
+      document.getElementById('packDoneCount').textContent = doneCount;
+      document.getElementById('packDownloadAll').classList.add('visible');
+
+    } catch (e) {
+      setPackCardState(i, 'error', 'Ошибка — попробуйте ещё раз');
+    }
+  }
 }
 
-function hashCode(str) {
-  let h = 0;
-  for (let i = 0; i < str.length; i++) { h = Math.imul(31, h) + str.charCodeAt(i) | 0; }
-  return h;
+function setPackCardState(i, state, statusText) {
+  const item = document.getElementById(`pci-${i}`);
+  item.classList.remove('generating', 'done', 'error');
+  if (state) item.classList.add(state);
+  document.getElementById(`pcs-${i}`).textContent = statusText;
 }
 
-function showResult(url) {
-  document.getElementById('spinner').style.display = 'none';
-  document.getElementById('resultPlaceholder').style.display = 'none';
-  const img = document.getElementById('resultImgEl');
-  img.src = url;
-  const dl = document.getElementById('downloadBtn');
-  dl.href = url;
-  document.getElementById('resultImg').style.display = 'block';
+function resetPackUI() {
+  for (let i = 0; i < 5; i++) {
+    setPackCardState(i, '', '');
+    const thumb = document.getElementById(`pct-${i}`);
+    if (thumb) { thumb.src = ''; }
+  }
+}
+
+// DOWNLOAD ALL
+function downloadAll() {
+  packUrls.forEach((url, i) => {
+    if (!url) return;
+    const a = document.createElement('a');
+    a.href = url; a.download = `card-${i+1}-${PACK_SLOTS[i].title}.png`;
+    a.click();
+  });
 }
 
 function regenerate() {
   document.getElementById('resultImg').style.display = 'none';
   document.getElementById('resultPlaceholder').style.display = 'flex';
-  generate();
+  generateSingle(document.getElementById('prompt').value.trim());
 }
 
-function getApiKey() {
-  return localStorage.getItem('or_api_key') || '';
+// ─── API ───
+async function callApi(prompt) {
+  const apiKey = localStorage.getItem('or_api_key') || '';
+  if (!apiKey) return demoUrl(prompt);
+
+  const res = await fetch('https://openrouter.ai/api/v1/images/generations', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json', 'HTTP-Referer': window.location.origin, 'X-Title': 'Карточки' },
+    body: JSON.stringify({ model: 'openai/gpt-image-1', prompt, n: 1, size: '1024x1024', quality: 'standard' })
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error?.message || `Ошибка API: ${res.status}`);
+  }
+
+  const data = await res.json();
+  const url = data.data?.[0]?.url || data.data?.[0]?.b64_json;
+  if (!url) throw new Error('Изображение не получено');
+  return url;
 }
 
+async function demoUrl(prompt) {
+  await new Promise(r => setTimeout(r, 1200 + Math.random() * 800));
+  let h = 0;
+  for (let i = 0; i < prompt.length; i++) h = Math.imul(31, h) + prompt.charCodeAt(i) | 0;
+  const seed = (Math.abs(h) + Math.floor(Math.random() * 100)) % 1000;
+  showToast('Демо-режим. Добавьте ключ OpenRouter для реальной генерации.');
+  return `https://picsum.photos/seed/${seed}/1024/1024`;
+}
+
+// ─── BALANCE ───
 function updateBalance() {
   const el = document.getElementById('balanceDisplay');
   if (balance === 1) el.textContent = '1 бесплатная';
   else if (balance === 0) el.textContent = '0 генераций';
-  else el.textContent = `${balance} генерац${balance === 1 ? 'ия' : balance < 5 ? 'ии' : 'ий'}`;
+  else el.textContent = `${balance} генерац${balance < 5 ? 'ии' : 'ий'}`;
 }
 
-// ─── PAYMENT MODAL ───
-const planNames = { single: 'Разовая', pack5: 'Стартовый', pack15: 'Профи' };
-
+// ─── PAYMENT ───
+const planNames = { single: 'Разовая', pack5: 'Комплект', pack20: 'Профи' };
 function openPayment(plan, price, count) {
-  currentPlan = { plan, price, count };
-  document.getElementById('modalPlanName').textContent = planNames[plan];
+  document.getElementById('modalPlanName').textContent = planNames[plan] || plan;
   document.getElementById('modalPlanCount').textContent = `${count} шт`;
   document.getElementById('modalPlanPer').textContent = `${(price/count).toFixed(1)} ₽`;
   document.getElementById('modalPlanPrice').textContent = `${price} ₽`;
-  document.getElementById('modalPlanDesc').textContent = `${planNames[plan]} — ${count} генерац${count===1?'ия':count<5?'ии':'ий'}`;
+  document.getElementById('modalPlanDesc').textContent = `${planNames[plan] || plan} — ${count} генерац${count===1?'ия':count<5?'ии':'ий'}`;
   document.getElementById('ym_sum').value = price;
-  document.getElementById('ym_targets').value = `Карточки: ${planNames[plan]}, ${count} генерац${count===1?'ия':count<5?'ии':'ий'}`;
+  document.getElementById('ym_targets').value = `Карточки: ${planNames[plan] || plan}, ${count} шт`;
   document.getElementById('ym_label').value = `${plan}_${Date.now()}`;
   document.getElementById('paymentModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-function closePayment() {
-  document.getElementById('paymentModal').classList.remove('open');
-  document.body.style.overflow = '';
-}
+function closePayment() { document.getElementById('paymentModal').classList.remove('open'); document.body.style.overflow = ''; }
+function closePaymentOnOverlay(e) { if (e.target === document.getElementById('paymentModal')) closePayment(); }
 
-function closePaymentOnOverlay(e) {
-  if (e.target === document.getElementById('paymentModal')) closePayment();
-}
-
-// After payment redirect back — add balance
 window.addEventListener('load', () => {
-  const params = new URLSearchParams(location.search);
-  if (params.get('payment') === 'success') {
-    const plan = params.get('plan');
-    const counts = { single: 1, pack5: 5, pack15: 15 };
-    const added = counts[plan] || 0;
-    if (added) {
-      balance += added;
-      updateBalance();
-      showToast(`Отлично! На счёт добавлено ${added} генерац${added===1?'ия':added<5?'ии':'ий'}.`);
-    }
+  const p = new URLSearchParams(location.search);
+  if (p.get('payment') === 'success') {
+    const added = { single: 1, pack5: 5, pack20: 20 }[p.get('plan')] || 0;
+    if (added) { balance += added; updateBalance(); showToast(`Отлично! Добавлено ${added} генерац${added===1?'ия':added<5?'ии':'ий'}.`); }
     history.replaceState({}, '', location.pathname);
   }
 });
 
 // ─── FAQ ───
-function toggleFaq(el) {
-  const item = el.closest('.faq-item');
-  item.classList.toggle('open');
-}
+function toggleFaq(el) { el.closest('.faq-item').classList.toggle('open'); }
 
 // ─── TOAST ───
 let toastTimer;
 function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 4000);
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 4000);
 }
 
-// ─── SCROLL ANIMATIONS ───
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } });
-}, { threshold: 0.1 });
-
+// ─── ANIMATIONS ───
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } }), { threshold: 0.08 });
 document.querySelectorAll('.step, .stat, .plan, .faq-item').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-  observer.observe(el);
+  el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity 0.5s ease, transform 0.5s ease'; obs.observe(el);
 });
 </script>
 </body>
