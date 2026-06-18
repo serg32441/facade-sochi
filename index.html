@@ -3,67 +3,1005 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sochi Facade Pro</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>Карточки для маркетплейсов — AI генерация</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap" rel="stylesheet">
 <style>
-:root { --bg: #0A0A0F; --text: #fff; --accent: #3B82F6; --sec: rgba(255,255,255,0.7); --font: 'Inter', sans-serif; --mono: monospace; }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: var(--font); background: var(--bg); color: var(--text); line-height:1.6; }
-.container { max-width:1280px; margin:0 auto; padding:0 120px; }
-nav { position:fixed; top:0; width:100%; height:80px; z-index:1000; backdrop-filter:blur(12px); background:rgba(10,10,15,0.8); border-bottom:1px solid rgba(255,255,255,0.1); display:flex; align-items:center; }
-nav .container { display:flex; justify-content:space-between; align-items:center; }
-.logo { font-weight:700; font-size:18px; letter-spacing:-0.02em; }
-.nav-links { display:flex; gap:32px; }
-.nav-links a { color:var(--sec); text-decoration:none; font-size:14px; transition:color 0.3s; }
-.nav-links a:hover { color:var(--text); }
-.hero { min-height:100vh; display:flex; align-items:center; padding:80px 0; position:relative; }
-.hero::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:radial-gradient(ellipse at 20% 50%, rgba(59,130,246,0.05) 0%, transparent 50%); z-index:-1; }
-.hero-content { max-width:800px; }
-.hero-label { font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); margin-bottom:24px; }
-.hero h1 { font-size:96px; font-weight:800; letter-spacing:-0.04em; line-height:1.0; margin-bottom:48px; }
-.hero-description { font-size:18px; line-height:1.75; color:var(--sec); max-width:600px; margin-bottom:64px; }
-.cta-button { display:inline-block; padding:16px 48px; background:var(--accent); color:white; text-decoration:none; border-radius:9999px; font-weight:600; font-size:16px; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); box-shadow:0 4px 20px rgba(59,130,246,0.3); }
-.cta-button:hover { transform:scale(1.02); box-shadow:0 8px 30px rgba(59,130,246,0.4); }
-section { padding:128px 0; }
-.section-title { font-size:48px; font-weight:600; letter-spacing:-0.02em; margin-bottom:64px; }
-.section-subtitle { font-size:18px; color:var(--sec); max-width:600px; margin-bottom:96px; }
-.cards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
-.card { background:#0D0D12; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:48px; transition:transform 0.3s ease, box-shadow 0.3s ease; }
-.card:hover { transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,0.3); }
-.card-title { font-size:24px; font-weight:600; margin-bottom:24px; }
-.card-text { color:var(--sec); line-height:1.6; }
-.guarantee-box { background:linear-gradient(135deg, rgba(59,130,246,0.1) 0%, transparent 100%); border:1px solid rgba(59,130,246,0.2); border-radius:16px; padding:64px; text-align:center; }
-.scarcity-note { font-family:var(--mono); font-size:14px; color:var(--accent); text-align:center; margin-top:32px; }
-footer { border-top:1px solid rgba(255,255,255,0.1); padding:64px 0; text-align:center; color:var(--sec); font-size:14px; }
-.phone-link { color:var(--accent); text-decoration:none; font-weight:600; }
-.animate { animation:fadeInUp 0.6s ease-out forwards; opacity:0; }
-@keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-.delay-1 { animation-delay:0.1s; } .delay-2 { animation-delay:0.2s; } .delay-3 { animation-delay:0.3s; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #F9F8F6;
+  --surface: #FFFFFF;
+  --text: #111110;
+  --muted: #6B6B65;
+  --border: #E8E6E1;
+  --accent: #1A1A18;
+  --accent-light: #F0EFE9;
+  --blue: #2563EB;
+  --blue-light: #EFF4FF;
+  --radius: 20px;
+  --radius-lg: 28px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.05);
+  --shadow-lg: 0 2px 8px rgba(0,0,0,0.06), 0 12px 48px rgba(0,0,0,0.08);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── LAYOUT ─── */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+@media (max-width: 768px) { .wrap { padding: 0 20px; } }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  background: rgba(249,248,246,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.nav-logo { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+.nav-links { display: flex; gap: 8px; align-items: center; }
+.nav-links a {
+  font-size: 14px; color: var(--muted); text-decoration: none;
+  padding: 6px 14px; border-radius: 99px; transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--text); background: var(--accent-light); }
+.nav-cta {
+  background: var(--text); color: white !important;
+  padding: 8px 20px !important; border-radius: 99px !important;
+  font-size: 14px; font-weight: 500;
+}
+.nav-cta:hover { opacity: 0.85 !important; background: var(--text) !important; }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 160px 0 120px;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-block;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted);
+  border: 1px solid var(--border); border-radius: 99px;
+  padding: 5px 16px; margin-bottom: 40px;
+}
+.hero h1 {
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 700; letter-spacing: -0.04em;
+  line-height: 1.05; color: var(--text);
+  max-width: 860px; margin: 0 auto 28px;
+}
+.hero h1 em { font-style: normal; color: var(--muted); }
+.hero-sub {
+  font-size: 18px; color: var(--muted); line-height: 1.7;
+  max-width: 520px; margin: 0 auto 56px; font-weight: 400;
+}
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--text); color: white;
+  padding: 14px 32px; border-radius: 99px;
+  font-size: 15px; font-weight: 500; text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  border: none; cursor: pointer; font-family: inherit;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.22); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: white; color: var(--text);
+  padding: 14px 32px; border-radius: 99px;
+  font-size: 15px; font-weight: 500; text-decoration: none;
+  border: 1px solid var(--border);
+  transition: all 0.25s; cursor: pointer; font-family: inherit;
+}
+.btn-secondary:hover { border-color: #ccc; box-shadow: var(--shadow); }
+
+/* ─── STATS ─── */
+.stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  overflow: hidden; margin: 80px 0;
+}
+.stat {
+  background: var(--surface); padding: 40px 32px;
+  text-align: center;
+}
+.stat-value { font-size: 40px; font-weight: 700; letter-spacing: -0.04em; color: var(--text); }
+.stat-label { font-size: 14px; color: var(--muted); margin-top: 6px; }
+
+/* ─── SECTION ─── */
+section { padding: 100px 0; }
+.section-label {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+}
+.section-title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+  color: var(--text); margin-bottom: 20px;
+}
+.section-sub {
+  font-size: 17px; color: var(--muted); line-height: 1.7;
+  max-width: 500px;
+}
+
+/* ─── HOW IT WORKS ─── */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
+.step {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 40px 32px;
+  transition: box-shadow 0.3s;
+}
+.step:hover { box-shadow: var(--shadow-lg); }
+.step-num {
+  font-size: 12px; font-weight: 600; color: var(--muted);
+  letter-spacing: 0.06em; margin-bottom: 20px; display: block;
+}
+.step-title { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px; }
+.step-text { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+/* ─── PRICING ─── */
+.pricing { background: var(--surface); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden; margin-top: 64px; }
+.pricing-header { padding: 40px 48px 32px; border-bottom: 1px solid var(--border); }
+.pricing-header h3 { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.pricing-note { font-size: 14px; color: var(--muted); }
+.pricing-plans { display: grid; grid-template-columns: repeat(3, 1fr); }
+.plan {
+  padding: 40px; border-right: 1px solid var(--border);
+  position: relative; transition: background 0.2s;
+}
+.plan:last-child { border-right: none; }
+.plan.popular { background: var(--text); }
+.plan-badge {
+  position: absolute; top: -1px; left: 40px;
+  background: var(--blue); color: white;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 12px; border-radius: 0 0 8px 8px;
+}
+.plan-name { font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 20px; margin-top: 16px; }
+.plan.popular .plan-name { color: rgba(255,255,255,0.6); }
+.plan-price { font-size: 52px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-bottom: 6px; }
+.plan.popular .plan-price { color: white; }
+.plan-period { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+.plan.popular .plan-period { color: rgba(255,255,255,0.5); }
+.plan-per { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+.plan.popular .plan-per { color: rgba(255,255,255,0.5); }
+.plan-features { list-style: none; margin-bottom: 32px; }
+.plan-features li {
+  font-size: 14px; color: var(--muted); padding: 8px 0;
+  border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px;
+}
+.plan.popular .plan-features li { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.1); }
+.plan-features li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.plan-btn {
+  display: block; width: 100%; padding: 13px;
+  border-radius: 12px; font-size: 14px; font-weight: 500;
+  text-align: center; cursor: pointer; border: 1px solid var(--border);
+  background: white; color: var(--text); text-decoration: none;
+  transition: all 0.2s; font-family: inherit;
+}
+.plan-btn:hover { background: var(--accent-light); }
+.plan.popular .plan-btn { background: white; color: var(--text); border-color: white; }
+.plan.popular .plan-btn:hover { background: var(--accent-light); }
+.plan-cost { font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px; }
+.plan.popular .plan-cost { color: rgba(255,255,255,0.4); }
+
+/* ─── GENERATOR ─── */
+#generator { scroll-margin-top: 80px; }
+.generator-wrap {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  margin-top: 64px;
+}
+.gen-sidebar {
+  display: grid; grid-template-columns: 1fr 1fr; min-height: 560px;
+}
+.gen-left {
+  padding: 48px; border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 28px;
+}
+.gen-right {
+  padding: 48px; background: var(--bg);
+  display: flex; flex-direction: column; gap: 24px;
+}
+.gen-title { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
+.gen-subtitle { font-size: 14px; color: var(--muted); }
+
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-label { font-size: 13px; font-weight: 500; color: var(--text); }
+.form-label span { color: var(--muted); font-weight: 400; margin-left: 4px; }
+
+.textarea-wrap { position: relative; }
+textarea {
+  width: 100%; min-height: 140px; padding: 16px 20px;
+  border: 1.5px solid var(--border); border-radius: 16px;
+  font-family: inherit; font-size: 15px; color: var(--text);
+  background: white; resize: vertical; line-height: 1.6;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+textarea:focus { border-color: var(--text); box-shadow: 0 0 0 3px rgba(17,17,16,0.06); }
+textarea::placeholder { color: var(--muted); }
+
+.upload-zone {
+  border: 1.5px dashed var(--border); border-radius: 16px;
+  padding: 32px 20px; text-align: center; cursor: pointer;
+  transition: all 0.2s; background: white; position: relative;
+}
+.upload-zone:hover, .upload-zone.drag-over { border-color: var(--text); background: var(--accent-light); }
+.upload-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.upload-sub { font-size: 13px; color: var(--muted); }
+.upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.upload-preview { display: none; position: relative; }
+.upload-preview img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; }
+.upload-remove {
+  position: absolute; top: 8px; right: 8px;
+  background: white; border: 1px solid var(--border);
+  border-radius: 8px; width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 14px; color: var(--muted);
+  transition: all 0.2s;
+}
+.upload-remove:hover { color: var(--text); }
+
+.style-select {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+}
+.style-option {
+  padding: 10px 14px; border: 1.5px solid var(--border);
+  border-radius: 12px; font-size: 13px; cursor: pointer;
+  text-align: center; transition: all 0.2s; background: white;
+  color: var(--muted); font-family: inherit;
+}
+.style-option.active { border-color: var(--text); background: var(--accent-light); color: var(--text); font-weight: 500; }
+.style-option:hover:not(.active) { border-color: #ccc; }
+
+/* ─── PAYMENT MODAL ─── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(17,17,16,0.5);
+  backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: white; border-radius: var(--radius-lg);
+  width: 100%; max-width: 460px;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.2);
+  overflow: hidden; animation: slideUp 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes slideUp { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: translateY(0); } }
+.modal-head {
+  padding: 32px 36px 28px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.modal-head h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.03em; }
+.modal-head p { font-size: 14px; color: var(--muted); margin-top: 4px; }
+.modal-close { background: none; border: none; font-size: 20px; color: var(--muted); cursor: pointer; line-height: 1; padding: 4px; }
+.modal-body { padding: 28px 36px; }
+.modal-plan-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 0; border-bottom: 1px solid var(--border);
+  font-size: 15px;
+}
+.modal-plan-row:last-of-type { border-bottom: none; }
+.modal-plan-label { color: var(--muted); }
+.modal-plan-value { font-weight: 600; }
+.modal-total {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 0 0; font-size: 18px; font-weight: 700;
+}
+.yoomoney-btn {
+  display: block; width: 100%;
+  background: #6F36CB; color: white;
+  border: none; border-radius: 14px; padding: 15px;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  font-family: inherit; text-align: center;
+  transition: all 0.2s; margin-top: 24px; text-decoration: none;
+}
+.yoomoney-btn:hover { background: #5f2bb5; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(111,54,203,0.3); }
+.modal-secure { font-size: 12px; color: var(--muted); text-align: center; margin-top: 14px; }
+
+/* ─── RESULT ─── */
+.gen-result {
+  border: 1.5px solid var(--border); border-radius: 16px;
+  overflow: hidden; background: white; min-height: 300px;
+  display: flex; flex-direction: column;
+}
+.gen-result-placeholder {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 12px; color: var(--muted); padding: 40px;
+  text-align: center;
+}
+.gen-result-placeholder p { font-size: 14px; line-height: 1.6; }
+.result-img { width: 100%; display: none; }
+.result-img img { width: 100%; display: block; }
+.result-img-actions {
+  padding: 16px; display: flex; gap: 8px;
+  border-top: 1px solid var(--border);
+}
+.result-img-actions button, .result-img-actions a {
+  flex: 1; padding: 9px 16px; border-radius: 10px;
+  font-size: 13px; font-weight: 500; cursor: pointer;
+  font-family: inherit; text-align: center; text-decoration: none;
+  transition: all 0.2s;
+}
+.result-img-actions .btn-dl { background: var(--text); color: white; border: none; }
+.result-img-actions .btn-dl:hover { opacity: 0.85; }
+.result-img-actions .btn-regen { background: white; color: var(--text); border: 1px solid var(--border); }
+.result-img-actions .btn-regen:hover { background: var(--accent-light); }
+
+.gen-balance {
+  background: var(--accent-light); border-radius: 12px;
+  padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;
+}
+.balance-label { font-size: 13px; color: var(--muted); }
+.balance-value { font-size: 15px; font-weight: 600; }
+.balance-add { font-size: 13px; color: var(--blue); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+
+.gen-submit {
+  width: 100%; padding: 15px; border-radius: 14px;
+  background: var(--text); color: white; border: none;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: all 0.25s; letter-spacing: -0.01em;
+}
+.gen-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+.gen-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.generating-spinner {
+  display: none; flex-direction: column; align-items: center;
+  justify-content: center; gap: 16px; padding: 60px 40px;
+  text-align: center;
+}
+.spinner {
+  width: 36px; height: 36px; border: 2.5px solid var(--border);
+  border-top-color: var(--text); border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.generating-spinner p { font-size: 14px; color: var(--muted); }
+
+/* ─── FAQ ─── */
+.faq { display: flex; flex-direction: column; gap: 0; margin-top: 48px; }
+.faq-item {
+  border-bottom: 1px solid var(--border); overflow: hidden;
+}
+.faq-question {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 0; cursor: pointer; gap: 20px;
+}
+.faq-question h4 { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; }
+.faq-toggle {
+  width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 16px; color: var(--muted); transition: all 0.2s;
+  background: white; cursor: pointer;
+}
+.faq-item.open .faq-toggle { transform: rotate(45deg); background: var(--text); color: white; border-color: var(--text); }
+.faq-answer {
+  max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease;
+  font-size: 15px; color: var(--muted); line-height: 1.7;
+}
+.faq-item.open .faq-answer { max-height: 300px; padding-bottom: 24px; }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 60px 0;
+}
+.footer-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 24px;
+}
+.footer-brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.footer-tagline { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+
+/* ─── NOTIFICATIONS ─── */
+.toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 2000;
+  background: var(--text); color: white;
+  padding: 14px 20px; border-radius: 14px;
+  font-size: 14px; box-shadow: var(--shadow-lg);
+  transform: translateY(80px); opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  max-width: 320px; line-height: 1.5;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .gen-sidebar { grid-template-columns: 1fr; }
+  .gen-right { border-top: 1px solid var(--border); }
+  .pricing-plans { grid-template-columns: 1fr; }
+  .plan { border-right: none; border-bottom: 1px solid var(--border); }
+  .plan:last-child { border-bottom: none; }
+  .steps { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .hero { padding: 120px 0 80px; }
+  .hero h1 { font-size: 40px; }
+  section { padding: 72px 0; }
+  .gen-left, .gen-right { padding: 28px; }
+  .nav-links a:not(.nav-cta) { display: none; }
+}
 </style>
 </head>
 <body>
-<nav><div class="container"><div class="logo">SOCHI FACADE PRO</div><div class="nav-links"><a href="#services">Услуги</a><a href="#guarantee">Гарантия</a><a href="#contact">Контакты</a></div></div></nav>
-<section class="hero"><div class="container"><div class="hero-content">
-<div class="hero-label animate delay-1">Премиальная клининг-служба</div>
-<h1 class="animate delay-2">Ваш фасад<br>засияет<br>как новый</h1>
-<p class="hero-description animate delay-3">Задумывались ли вы, какое впечатление производит здание с грязным фасадом? Мы возвращаем архитектуре её истинный облик.</p>
-<a href="tel:+79153138254" class="cta-button animate delay-3">Получить бесплатный расчёт</a>
-<p class="scarcity-note animate delay-3">🚨 Всего 3 места на этот месяц</p>
-</div></div></section>
-<section id="services"><div class="container"><h2 class="section-title animate">Наши услуги</h2><p class="section-subtitle animate delay-1">Мы специализируемся на премиальной очистке фасадов зданий любой сложности.</p>
-<div class="cards-grid">
-<div class="card animate delay-1"><h3 class="card-title">Мойка высотных зданий</h3><p class="card-text">Промышленный альпинизм и современные системы очистки. Безопасно и эффективно.</p></div>
-<div class="card animate delay-2"><h3 class="card-title">Очистка остекления</h3><p class="card-text">Удаление налёта, водного камня и атмосферных загрязнений с витражей.</p></div>
-<div class="card animate delay-3"><h3 class="card-title">Гидрофобная защита</h3><p class="card-text">Нанесение защитного слоя, который отталкивает воду и грязь на срок до 3 лет.</p></div>
-</div></div></section>
-<section id="guarantee"><div class="container"><div class="guarantee-box animate">
-<h2 class="section-title" style="text-align:center;">Гарантия чистоты</h2>
-<p class="section-subtitle" style="text-align:center; margin:0 auto 48px;">Мы настолько уверены в качестве, что готовы взять риск на себя. Если после нашей работы фасад не будет сиять — вы не платите.</p>
-<a href="tel:+79153138254" class="cta-button">Вызвать специалиста</a>
-</div></div></section>
-<footer id="contact"><div class="container">
-<p>Свяжитесь с нами: <a href="tel:+79153138254" class="phone-link">+7 915 313-82-54</a></p>
-<p>Работаем в Сочи и на всём побережье</p>
-<p style="margin-top:32px; opacity:0.5;">© 2026 Sochi Facade Pro</p>
-</div></footer>
-</body></html>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap">
+    <a href="/" class="nav-logo">Карточки</a>
+    <div class="nav-links">
+      <a href="#how">Как работает</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#faq">FAQ</a>
+      <a href="#generator" class="nav-cta">Создать карточку</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-badge">AI-генерация изображений для маркетплейсов</div>
+    <h1>Карточки для Wildberries<br><em>и Ozon за одну минуту</em></h1>
+    <p class="hero-sub">Создайте профессиональные фотографии товара без фотостудии, дизайнера и подписок. Одна генерация — 59 рублей.</p>
+    <div class="hero-actions">
+      <a href="#generator" class="btn-primary">Попробовать бесплатно</a>
+      <a href="#pricing" class="btn-secondary">Посмотреть тарифы</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">59 ₽</div>
+        <div class="stat-label">за одно изображение</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">~60 сек</div>
+        <div class="stat-label">время генерации</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">1024px</div>
+        <div class="stat-label">разрешение на выходе</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="section-label">Процесс</div>
+    <h2 class="section-title">Три шага до<br>готовой карточки</h2>
+    <p class="section-sub">Никаких сложных настроек. Описали товар — получили изображение.</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3 class="step-title">Опишите товар</h3>
+        <p class="step-text">Напишите, что хотите увидеть на карточке. Или загрузите пример — нейросеть поймёт стиль и адаптирует его.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3 class="step-title">Оплатите генерацию</h3>
+        <p class="step-text">Выберите одну картинку или пакет. Оплата через ЮMoney — быстро и привычно, без иностранных карт.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3 class="step-title">Скачайте результат</h3>
+        <p class="step-text">Готовое изображение в высоком разрешении. Если не понравилось — перегенерируйте с новым описанием.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-label">Тарифы</div>
+    <h2 class="section-title">Платите только<br>за то, что нужно</h2>
+    <p class="section-sub">Нет подписок, нет списаний. Купили — пользуетесь, пока не израсходуете.</p>
+
+    <div class="pricing">
+      <div class="pricing-header">
+        <h3>Стоимость генерации</h3>
+        <p class="pricing-note">Себестоимость одной генерации через OpenRouter API — около 4 рублей. Цены включают все расходы на инфраструктуру.</p>
+      </div>
+      <div class="pricing-plans">
+        <div class="plan" data-plan="single" data-price="59" data-count="1">
+          <div class="plan-name">Разовая</div>
+          <div class="plan-price">59 <span style="font-size:24px;">₽</span></div>
+          <div class="plan-per">1 изображение</div>
+          <ul class="plan-features">
+            <li>1 генерация</li>
+            <li>Разрешение 1024×1024</li>
+            <li>Скачать PNG</li>
+            <li>Действует 30 дней</li>
+          </ul>
+          <button class="plan-btn" onclick="openPayment('single', 59, 1)">Оплатить</button>
+          <div class="plan-cost">59 ₽ / генерация</div>
+        </div>
+        <div class="plan popular" data-plan="pack5" data-price="249" data-count="5">
+          <div class="plan-badge">Популярное</div>
+          <div class="plan-name">Стартовый</div>
+          <div class="plan-price">249 <span style="font-size:24px; color:rgba(255,255,255,0.6);">₽</span></div>
+          <div class="plan-per">5 изображений</div>
+          <ul class="plan-features">
+            <li>5 генераций</li>
+            <li>Разрешение 1024×1024</li>
+            <li>Скачать PNG</li>
+            <li>Действует 60 дней</li>
+          </ul>
+          <button class="plan-btn" onclick="openPayment('pack5', 249, 5)">Оплатить</button>
+          <div class="plan-cost">49.8 ₽ / генерация</div>
+        </div>
+        <div class="plan" data-plan="pack15" data-price="649" data-count="15">
+          <div class="plan-name">Профи</div>
+          <div class="plan-price">649 <span style="font-size:24px;">₽</span></div>
+          <div class="plan-per">15 изображений</div>
+          <ul class="plan-features">
+            <li>15 генераций</li>
+            <li>Разрешение 1024×1024</li>
+            <li>Скачать PNG</li>
+            <li>Действует 90 дней</li>
+          </ul>
+          <button class="plan-btn" onclick="openPayment('pack15', 649, 15)">Оплатить</button>
+          <div class="plan-cost">43.3 ₽ / генерация</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GENERATOR -->
+<section id="generator">
+  <div class="wrap">
+    <div class="section-label">Генератор</div>
+    <h2 class="section-title">Создайте карточку<br>прямо сейчас</h2>
+    <p class="section-sub">Первая генерация — бесплатно. Попробуйте без регистрации.</p>
+
+    <div class="generator-wrap">
+      <div class="gen-sidebar">
+        <div class="gen-left">
+          <div>
+            <div class="gen-title">Опишите карточку</div>
+            <div class="gen-subtitle" style="margin-top:6px;">Чем точнее описание — тем лучше результат</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Описание товара <span>обязательно</span></label>
+            <div class="textarea-wrap">
+              <textarea id="prompt" placeholder="Например: белая керамическая кружка на деревянном столе, минималистичный стиль, мягкий студийный свет, белый фон, вид спереди"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Стиль фотографии</label>
+            <div class="style-select">
+              <button class="style-option active" data-style="studio" onclick="setStyle(this)">Студийный</button>
+              <button class="style-option" data-style="lifestyle" onclick="setStyle(this)">Лайфстайл</button>
+              <button class="style-option" data-style="infographic" onclick="setStyle(this)">Инфографика</button>
+              <button class="style-option" data-style="minimal" onclick="setStyle(this)">Минимализм</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Пример <span>необязательно</span></label>
+            <div class="upload-zone" id="uploadZone">
+              <input type="file" id="fileInput" accept="image/*" onchange="handleFileUpload(this)">
+              <div class="upload-title">Загрузите пример</div>
+              <div class="upload-sub">PNG, JPG, WEBP — до 10 МБ</div>
+            </div>
+            <div class="upload-preview" id="uploadPreview">
+              <img id="previewImg" src="" alt="">
+              <button class="upload-remove" onclick="removeUpload()">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="gen-right">
+          <div class="gen-balance">
+            <div>
+              <div class="balance-label">Баланс генераций</div>
+              <div class="balance-value" id="balanceDisplay">1 бесплатная</div>
+            </div>
+            <span class="balance-add" onclick="openPayment('pack5', 249, 5)">Пополнить</span>
+          </div>
+
+          <div class="gen-result" id="genResult">
+            <div class="gen-result-placeholder" id="resultPlaceholder">
+              <div style="width:56px; height:56px; border-radius:16px; background:var(--accent-light); display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--muted);">
+                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              </div>
+              <p>Здесь появится ваша<br>сгенерированная карточка</p>
+            </div>
+            <div class="generating-spinner" id="spinner">
+              <div class="spinner"></div>
+              <p>Генерируем изображение...<br>обычно занимает 30–60 секунд</p>
+            </div>
+            <div class="result-img" id="resultImg">
+              <img id="resultImgEl" src="" alt="Сгенерированное изображение">
+              <div class="result-img-actions">
+                <a id="downloadBtn" href="#" class="btn-dl" download="card.png">Скачать PNG</a>
+                <button class="btn-regen" onclick="regenerate()">Другой вариант</button>
+              </div>
+            </div>
+          </div>
+
+          <button class="gen-submit" id="generateBtn" onclick="generate()">Сгенерировать карточку</button>
+          <div style="font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">
+            Нажимая кнопку, вы соглашаетесь с условиями использования сервиса.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-label">Вопросы</div>
+    <h2 class="section-title">Часто спрашивают</h2>
+
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h4>Как это работает технически?</h4>
+          <button class="faq-toggle">+</button>
+        </div>
+        <div class="faq-answer">Мы используем GPT Image Generation через OpenRouter API — на сегодня это одна из лучших моделей для генерации товарных изображений. После оплаты и ввода описания запрос уходит в нейросеть, и вы получаете готовое изображение в разрешении 1024×1024.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h4>Почему это дешевле, чем покупать подписку?</h4>
+          <button class="faq-toggle">+</button>
+        </div>
+        <div class="faq-answer">Зарубежные сервисы с подпиской стоят от 2000 рублей в месяц, и часто требуют иностранную карту. Наш сервис работает в России, принимает оплату через ЮMoney и даёт возможность купить ровно столько генераций, сколько нужно прямо сейчас — без переплаты.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h4>Как написать хорошее описание для карточки?</h4>
+          <button class="faq-toggle">+</button>
+        </div>
+        <div class="faq-answer">Укажите: что за товар, цвет и материал, стиль фотографии (белый фон, лайфстайл, минимализм), освещение, ракурс. Пример: «чёрный рюкзак из нейлона, студийный свет, белый фон, вид спереди, вид сбоку». Чем точнее — тем лучше результат.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h4>Что делать, если результат не понравился?</h4>
+          <button class="faq-toggle">+</button>
+        </div>
+        <div class="faq-answer">Каждая попытка списывает одну генерацию. Если результат не устраивает — переформулируйте описание и попробуйте снова. Многие продавцы делают 2–3 попытки, чтобы найти идеальный вариант, поэтому брать пакет на 5–15 генераций выгоднее.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h4>Безопасна ли оплата через ЮMoney?</h4>
+          <button class="faq-toggle">+</button>
+        </div>
+        <div class="faq-answer">Да, ЮMoney — официальная российская платёжная система, принадлежащая Яндексу. Платёж защищён SSL-шифрованием. Мы не храним данные вашей карты — всё обрабатывается на стороне ЮMoney.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Карточки</div>
+        <div class="footer-tagline">AI-генерация для маркетплейсов</div>
+      </div>
+      <div class="footer-links">
+        <a href="#">Условия использования</a>
+        <a href="#">Политика конфиденциальности</a>
+        <a href="mailto:support@example.com">Поддержка</a>
+      </div>
+    </div>
+    <div style="margin-top:32px; padding-top:24px; border-top:1px solid var(--border); font-size:13px; color:var(--muted);">
+      Сервис использует GPT Image Generation через OpenRouter API. Оплата через ЮMoney.
+    </div>
+  </div>
+</footer>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="paymentModal" onclick="closePaymentOnOverlay(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h3>Оплата</h3>
+        <p id="modalPlanDesc">Стартовый пакет — 5 генераций</p>
+      </div>
+      <button class="modal-close" onclick="closePayment()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-plan-row">
+        <span class="modal-plan-label">Тариф</span>
+        <span class="modal-plan-value" id="modalPlanName">Стартовый</span>
+      </div>
+      <div class="modal-plan-row">
+        <span class="modal-plan-label">Количество генераций</span>
+        <span class="modal-plan-value" id="modalPlanCount">5 шт</span>
+      </div>
+      <div class="modal-plan-row">
+        <span class="modal-plan-label">Стоимость одной генерации</span>
+        <span class="modal-plan-value" id="modalPlanPer">49.8 ₽</span>
+      </div>
+      <div class="modal-total">
+        <span>Итого</span>
+        <span id="modalPlanPrice">249 ₽</span>
+      </div>
+
+      <!-- YooMoney payment form -->
+      <form id="yoomoneyForm" method="POST" action="https://yoomoney.ru/quickpay/confirm.xml" target="_blank">
+        <input type="hidden" name="receiver" id="ym_receiver" value="ВАШ_НОМЕР_КОШЕЛЬКА">
+        <input type="hidden" name="quickpay-form" value="button">
+        <input type="hidden" name="targets" id="ym_targets" value="Генерация карточки">
+        <input type="hidden" name="sum" id="ym_sum" value="249">
+        <input type="hidden" name="label" id="ym_label" value="">
+        <input type="hidden" name="successURL" value="">
+        <button type="submit" class="yoomoney-btn">Оплатить через ЮMoney</button>
+      </form>
+      <p class="modal-secure">Платёж защищён. Данные карты не передаются третьим лицам.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── STATE ───
+let balance = 1; // free generation
+let selectedStyle = 'studio';
+let uploadedFile = null;
+let currentPlan = null;
+
+// ─── STYLE SELECT ───
+function setStyle(el) {
+  document.querySelectorAll('.style-option').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  selectedStyle = el.dataset.style;
+}
+
+// ─── FILE UPLOAD ───
+function handleFileUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 10 * 1024 * 1024) { showToast('Файл слишком большой. Максимум 10 МБ.'); return; }
+  uploadedFile = file;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('previewImg').src = e.target.result;
+    document.getElementById('uploadZone').style.display = 'none';
+    document.getElementById('uploadPreview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeUpload() {
+  uploadedFile = null;
+  document.getElementById('fileInput').value = '';
+  document.getElementById('previewImg').src = '';
+  document.getElementById('uploadZone').style.display = 'block';
+  document.getElementById('uploadPreview').style.display = 'none';
+}
+
+// drag-over styling
+const zone = document.getElementById('uploadZone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+zone.addEventListener('drop', e => {
+  e.preventDefault(); zone.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    document.getElementById('fileInput').files = e.dataTransfer.files;
+    handleFileUpload(document.getElementById('fileInput'));
+  }
+});
+
+// ─── GENERATE ───
+async function generate() {
+  const prompt = document.getElementById('prompt').value.trim();
+  if (!prompt) { showToast('Пожалуйста, опишите товар перед генерацией.'); return; }
+  if (balance <= 0) { openPayment('pack5', 249, 5); return; }
+
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = true;
+  btn.textContent = 'Генерируем...';
+
+  document.getElementById('resultPlaceholder').style.display = 'none';
+  document.getElementById('resultImg').style.display = 'none';
+  document.getElementById('spinner').style.display = 'flex';
+
+  const styleMap = {
+    studio: 'professional product photo, studio lighting, pure white background, sharp focus',
+    lifestyle: 'lifestyle product photography, natural light, cozy environment, editorial style',
+    infographic: 'product infographic, clean design, white background, product features highlighted',
+    minimal: 'minimalist product photography, clean composition, soft shadows, pastel background'
+  };
+  const fullPrompt = `${prompt}, ${styleMap[selectedStyle]}, marketplace product card, high quality, 4K`;
+
+  try {
+    const apiKey = getApiKey();
+    if (!apiKey) {
+      // Demo mode — show placeholder
+      await demoGenerate(prompt);
+      return;
+    }
+
+    const res = await fetch('https://openrouter.ai/api/v1/images/generations', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': window.location.origin,
+        'X-Title': 'Карточки для маркетплейсов'
+      },
+      body: JSON.stringify({
+        model: 'openai/gpt-image-1',
+        prompt: fullPrompt,
+        n: 1,
+        size: '1024x1024',
+        quality: 'standard'
+      })
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error?.message || `Ошибка API: ${res.status}`);
+    }
+
+    const data = await res.json();
+    const imageUrl = data.data?.[0]?.url || data.data?.[0]?.b64_json;
+
+    if (!imageUrl) throw new Error('Изображение не получено');
+
+    balance--;
+    updateBalance();
+    showResult(imageUrl.startsWith('data:') ? imageUrl : imageUrl);
+  } catch (e) {
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('resultPlaceholder').style.display = 'flex';
+    showToast(e.message || 'Произошла ошибка. Попробуйте ещё раз.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Сгенерировать карточку';
+  }
+}
+
+async function demoGenerate(prompt) {
+  await new Promise(r => setTimeout(r, 2000));
+  // Use a placeholder image service for demo
+  const seed = Math.abs(hashCode(prompt)) % 1000;
+  const demoUrl = `https://picsum.photos/seed/${seed}/1024/1024`;
+  balance--;
+  updateBalance();
+  showResult(demoUrl);
+  showToast('Демо-режим: добавьте ключ OpenRouter для реальной генерации.');
+}
+
+function hashCode(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) { h = Math.imul(31, h) + str.charCodeAt(i) | 0; }
+  return h;
+}
+
+function showResult(url) {
+  document.getElementById('spinner').style.display = 'none';
+  document.getElementById('resultPlaceholder').style.display = 'none';
+  const img = document.getElementById('resultImgEl');
+  img.src = url;
+  const dl = document.getElementById('downloadBtn');
+  dl.href = url;
+  document.getElementById('resultImg').style.display = 'block';
+}
+
+function regenerate() {
+  document.getElementById('resultImg').style.display = 'none';
+  document.getElementById('resultPlaceholder').style.display = 'flex';
+  generate();
+}
+
+function getApiKey() {
+  return localStorage.getItem('or_api_key') || '';
+}
+
+function updateBalance() {
+  const el = document.getElementById('balanceDisplay');
+  if (balance === 1) el.textContent = '1 бесплатная';
+  else if (balance === 0) el.textContent = '0 генераций';
+  else el.textContent = `${balance} генерац${balance === 1 ? 'ия' : balance < 5 ? 'ии' : 'ий'}`;
+}
+
+// ─── PAYMENT MODAL ───
+const planNames = { single: 'Разовая', pack5: 'Стартовый', pack15: 'Профи' };
+
+function openPayment(plan, price, count) {
+  currentPlan = { plan, price, count };
+  document.getElementById('modalPlanName').textContent = planNames[plan];
+  document.getElementById('modalPlanCount').textContent = `${count} шт`;
+  document.getElementById('modalPlanPer').textContent = `${(price/count).toFixed(1)} ₽`;
+  document.getElementById('modalPlanPrice').textContent = `${price} ₽`;
+  document.getElementById('modalPlanDesc').textContent = `${planNames[plan]} — ${count} генерац${count===1?'ия':count<5?'ии':'ий'}`;
+  document.getElementById('ym_sum').value = price;
+  document.getElementById('ym_targets').value = `Карточки: ${planNames[plan]}, ${count} генерац${count===1?'ия':count<5?'ии':'ий'}`;
+  document.getElementById('ym_label').value = `${plan}_${Date.now()}`;
+  document.getElementById('paymentModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePayment() {
+  document.getElementById('paymentModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closePaymentOnOverlay(e) {
+  if (e.target === document.getElementById('paymentModal')) closePayment();
+}
+
+// After payment redirect back — add balance
+window.addEventListener('load', () => {
+  const params = new URLSearchParams(location.search);
+  if (params.get('payment') === 'success') {
+    const plan = params.get('plan');
+    const counts = { single: 1, pack5: 5, pack15: 15 };
+    const added = counts[plan] || 0;
+    if (added) {
+      balance += added;
+      updateBalance();
+      showToast(`Отлично! На счёт добавлено ${added} генерац${added===1?'ия':added<5?'ии':'ий'}.`);
+    }
+    history.replaceState({}, '', location.pathname);
+  }
+});
+
+// ─── FAQ ───
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+// ─── TOAST ───
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+// ─── SCROLL ANIMATIONS ───
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.step, .stat, .plan, .faq-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
